@@ -1,11 +1,6 @@
-import {combineReducers, configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
-import {reducers} from "./reducers";
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
+import {reducers} from "./reducers/reducers";
 
-// const middleware = getDefaultMiddleware({
-//     immutableCheck: false,
-//     serializableCheck: false,
-//     thunk: true,
-// });
 
 const rootReducer = combineReducers(reducers);
 
