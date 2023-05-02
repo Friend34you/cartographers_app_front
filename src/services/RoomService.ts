@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {IComment} from "../models/IComment";
+import {IRoom} from "../models/IRoom";
 
-const url = 'https://jsonplaceholder.typicode.com'
+const url = 'http://localhost:5000'
 
 export const roomAPI = createApi({
     reducerPath: 'roomAPI',
@@ -9,9 +9,9 @@ export const roomAPI = createApi({
         baseUrl: url
     }),
     endpoints: (builder) => ({
-        fetchAllRooms: builder.query<IComment[], any>({
+        fetchAllRooms: builder.query<IRoom[], any>({
             query: () => ({
-                url: '/comments'
+                url: '/rooms'
             })
         })
     })
