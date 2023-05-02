@@ -1,7 +1,8 @@
 import React, {FC, ReactComponentElement, ReactElement} from "react";
 
 import {ALL_ROOMS_ROUTE, AUTH_ROUTE} from "./utils/consts";
-import Rooms from "./components/Rooms";
+import Rooms from "./components/Rooms/Rooms";
+import Auth from "./components/Auth";
 
 
 interface Routes {
