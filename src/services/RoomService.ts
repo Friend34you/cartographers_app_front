@@ -13,6 +13,15 @@ export const roomAPI = createApi({
             query: () => ({
                 url: '/rooms'
             })
+        }),
+        findRoom: builder.mutation<any, any>({
+            query: (roomName) => ({
+                url: '/rooms/search/',
+                method: "GET",
+                params: {
+                    search_value: roomName
+                }
+            })
         })
     })
 

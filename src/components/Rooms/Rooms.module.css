@@ -1,0 +1,13 @@
+.rooms_screen {
+    height: 100vh;
+}
+
+.rooms_container {
+    height: 100vh;
+    background-color: #FAFAFA;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly ;
+    align-items: center;
+    padding: 20px 0;
+}

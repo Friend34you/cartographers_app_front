@@ -2,7 +2,7 @@
   "rooms": [
     {
       "room_id": 1,
-      "room_name": "pupa",
+      "room_name": "pupalupa",
       "max_users": 10,
       "current_users": 3,
       "contains_password": true,
@@ -26,6 +26,46 @@
     },
     {
       "room_id": 4,
+      "room_name": "NotPupa",
+      "max_users": 10,
+      "current_users": 5,
+      "contains_password": false,
+      "is_game_started": true
+    },
+    {
+      "room_id": 5,
+      "room_name": "NotPupa",
+      "max_users": 10,
+      "current_users": 5,
+      "contains_password": false,
+      "is_game_started": true
+    },
+    {
+      "room_id": 6,
+      "room_name": "NotPupa",
+      "max_users": 10,
+      "current_users": 5,
+      "contains_password": false,
+      "is_game_started": true
+    },
+    {
+      "room_id": 7,
+      "room_name": "NotPupa",
+      "max_users": 10,
+      "current_users": 5,
+      "contains_password": false,
+      "is_game_started": true
+    },
+    {
+      "room_id": 8,
+      "room_name": "NotPupa",
+      "max_users": 10,
+      "current_users": 5,
+      "contains_password": false,
+      "is_game_started": true
+    },
+    {
+      "room_id": 9,
       "room_name": "NotPupa",
       "max_users": 10,
       "current_users": 5,
