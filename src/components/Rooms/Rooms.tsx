@@ -3,7 +3,7 @@ import {roomAPI} from "../../services/RoomService";
 import RoomItem from "./RoomItem/RoomItem";
 import Modal from "../common/Modal/Modal";
 import Navbar from "../Navbar/Navbar";
-import style from "./Rooms.module.css"
+import navbarStyle from "./Rooms.module.css"
 import useScroll from "../../hooks/useScroll";
 
 const Rooms: React.FC = () => {
@@ -16,14 +16,13 @@ const Rooms: React.FC = () => {
     })
     useScroll(parentRef, childRef, () => {
         setPage(prev => prev + 1)
-        console.log(page)
     })
     return (
-        <div className={style.rooms_screen}>
+        <>
             {/*<button onClick={() => setModalActive(true)}>Открыть модалку</button>*/}
             <Navbar/>
-            <div ref={parentRef} className={style.rooms_container}>
-                {/*{isLoading && <div style={{width: '100vw', height: "100vh", backgroundColor: "red"}}></div>}*/}
+            <div ref={parentRef} className={navbarStyle.rooms_container}>
+                {/*{isLoading && <div style={{width: "100%", height: "100vh", backgroundColor: "red"}}></div>}*/}
                 {rooms && rooms.map(room =>
                     <RoomItem
                         key={room.room_id}
@@ -32,12 +31,12 @@ const Rooms: React.FC = () => {
                         // modalActive={modalActive}
                     />
                 )}
-                <div ref={childRef} style={{width: '100vw', height: "50px", backgroundColor: "green"}}></div>
+                <div ref={childRef} style={{width: '100vw', height: "20px", backgroundColor: "green"}}></div>
             </div>
             {/*<Modal active={modalActive} setActive={setModalActive}>*/}
 
             {/*</Modal>*/}
-        </div>
+        </>
     );
 };
 

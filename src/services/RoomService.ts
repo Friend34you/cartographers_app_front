@@ -11,7 +11,7 @@ export const roomAPI = createApi({
     endpoints: (builder) => ({
         fetchAllRooms: builder.query<IRoom[], any>({
             query: () => ({
-                url: '/rooms'
+                url: '/rooms',
             })
         }),
         findRoom: builder.mutation<any, any>({

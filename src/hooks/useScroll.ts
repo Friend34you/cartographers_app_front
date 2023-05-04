@@ -7,7 +7,7 @@ export default function useScroll(parentRef: RefObject<any>, childRef: RefObject
         const options = {
             root: parentRef.current,
             rootMargin: "0px",
-            threshold: 0,
+            threshold: 0.5,
         };
 
         observer.current = new IntersectionObserver(([target]) => {

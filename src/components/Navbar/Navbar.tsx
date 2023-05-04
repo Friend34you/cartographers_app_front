@@ -11,11 +11,10 @@ const Navbar = () => {
     const [searchValue, setSearchValue] = useState('');
     const [findRoom, {data}] = roomAPI.useFindRoomMutation()
     const debouncedCallback = useDebounce((value: string) => {
-        console.log("Подгрузка:" + value)
         return findRoom(value)
     }, 1000)
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log("value" + searchValue)
+        console.log(searchValue)
         setSearchValue(e.target.value);
         debouncedCallback(e.target.value)
     }
