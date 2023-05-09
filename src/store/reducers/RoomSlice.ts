@@ -18,7 +18,6 @@ export const roomSlice = createSlice(
             changeName(state, action: PayloadAction<string>) {
                 state.name = action.payload
             },
-
         }
 
     }

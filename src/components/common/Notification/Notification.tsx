@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
+import notificationStyle from "./Notification.module.css"
 
-const Notification = () => {
+interface NotificationProps {
+    active: boolean;
+    // setActive(): void;
+}
+
+const Notification: FC<NotificationProps> = ({active}) => {
     return (
-        <div>
-            
+        <div
+            className={active
+                ? `${notificationStyle.notification} ${notificationStyle.active}`
+                : notificationStyle.notification}
+        >
+            Успешно выполнено
         </div>
     );
 };

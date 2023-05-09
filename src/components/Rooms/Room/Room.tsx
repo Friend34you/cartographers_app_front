@@ -5,11 +5,15 @@ import {ALL_ROOMS_ROUTE} from "../../../utils/consts";
 import roomStyle from "./Room.module.css"
 import UserIcon from "../../common/UserIcon/UserIcon";
 import copyImg from "../../../static/copy.png"
+import Notification from "../../common/Notification/Notification";
 
 const Room: FC = () => {
     const [inviteCode, setInviteCode] = useState('*здесь будет код*')
+    const [notificationActive, setNotificationActive] = useState(false)
     async function handlerOnClick() {
         await navigator.clipboard.writeText(inviteCode)
+        setNotificationActive(true);
+        setTimeout(() => setNotificationActive(false), 1000)
     }
 
     return (
@@ -57,7 +61,7 @@ const Room: FC = () => {
                     </div>
                 </section>
             </div>
-            <div className={`${roomStyle.notification} ${roomStyle.active}`}>Успешно выполнено</div>
+            <Notification active={notificationActive}/>
         </div>
     );
 };
