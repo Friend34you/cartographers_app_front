@@ -3,6 +3,8 @@ import {IRoom} from "../../../models/IRoom";
 import roomStyle from "./RoomItem.module.css"
 import Modal from "../../common/Modal/Modal";
 import Button from "../../common/Button/Button";
+import {Link} from "react-router-dom";
+import {ROOM_ROUTE} from "../../../utils/consts";
 
 interface RoomItemProps {
     room: IRoom;
@@ -26,11 +28,22 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
                 <p>{room.current_users} / {room.max_users}</p>
                 <p>С паролем: {room.contains_password ? "Да" : "нет"}</p>
                 <div className={roomStyle.button_container}>
-                    <Button
-                        type={"accept"}
-                        onClick={onClick}>
-                        Войти
-                    </Button>
+                    {
+                        room.contains_password
+                            ? <Button
+                                type={"accept"}
+                                onClick={onClick}>
+                                Войти
+                            </Button>
+                            : <Link to={ROOM_ROUTE + room.room_id}>
+                                <Button
+                                    type={"accept"}
+                                    onClick={onClick}>
+                                    Войти
+                                </Button>
+                            </Link>
+                    }
+
                 </div>
             </div>
             <Modal active={modalActive} setActive={setModalActive}>
@@ -38,6 +51,12 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
                 <p>{room.current_users} / {room.max_users}</p>
                 <p>Введите пароль:</p>
                 <input type="password"/>
+                <Link to={ROOM_ROUTE + room.room_id}>
+                    <Button
+                        type={"accept"}>
+                        Войти
+                    </Button>
+                </Link>
             </Modal>
         </>
     );

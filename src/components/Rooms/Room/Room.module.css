@@ -1,0 +1,90 @@
+:root {
+    --element-height: 50vh
+}
+
+body {
+    background: #FAFAFA;
+}
+
+.room_container {
+    padding: 40px;
+}
+
+.main_content_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.item {
+    min-height: 40px;
+    width: 30vw;
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 30px;
+    margin: 10px 0;
+}
+
+.item__users {
+    height: var(--element-height);
+    overflow: auto;
+}
+
+.item__invite_code {
+    height: 30vh;
+}
+
+.buttons_wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 20vh;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #14A0DC;
+    height: 50px;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.invite_code {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F3F3F3;
+    padding: 10px;
+    margin: 10% auto;
+    border-radius: 10px;
+}
+
+.copy_img {
+    width: 25px;
+    cursor: pointer;
+}
+
+.notification {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    bottom: 0;
+    left: 0;
+    width: fit-content;
+    height: 40px;
+    background-color: #dedcdc;
+    transform: translateX(-300px);
+    transition: .4s linear;
+}
+
+.notification.active {
+    transform: translateX(0px);
+}
