@@ -5,6 +5,7 @@ import useDebounce from "../../hooks/useDebounce";
 import {roomAPI} from "../../services/RoomService";
 import Modal from "../common/Modal/Modal";
 import UserIcon from "../common/UserIcon/UserIcon";
+import CreateRoom from "../Rooms/CreateRoom/CreateRoom";
 
 const Navbar = () => {
     const [codeEnterModal, setCodeEnterModal] = useState(false);
@@ -14,7 +15,7 @@ const Navbar = () => {
     const debouncedCallback = useDebounce((value: string) => {
         return findRoom(value)
     }, 1000)
-    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(searchValue)
         setSearchValue(e.target.value);
         debouncedCallback(e.target.value)
@@ -35,13 +36,17 @@ const Navbar = () => {
                     >
                         Войти по Коду
                     </Button>
-                    <input value={searchValue} onChange={changeHandler} type="search"/>
+                    <input value={searchValue} onChange={handlerChange} type="search"/>
                 </div>
                 <UserIcon/>
                 {/*<div className={navbarStyle.profile}></div>*/}
             </div>
-            <Modal active={codeEnterModal} setActive={setCodeEnterModal}>gff</Modal>
-            <Modal active={createRoomModal} setActive={setCreateRoomModal}>gfgf</Modal>
+            <Modal active={codeEnterModal} setActive={setCodeEnterModal}>
+                gff
+            </Modal>
+            <Modal active={createRoomModal} setActive={setCreateRoomModal}>
+                <CreateRoom setModal={setCreateRoomModal}/>
+            </Modal>
             <div>{data && data[0]}</div>
         </>
 

@@ -11,10 +11,11 @@
     opacity: 0;
     pointer-events: none;
     transition: .2s linear;
+
 }
 
 .modal__content {
-    padding: 20px;
+    padding: 30px;
     border-radius: 12px;
     background-color: white;
 }

@@ -15,8 +15,8 @@ export const roomAPI = createApi({
             })
         }),
         fetchRoom: builder.query<IRoom[], any>({
-            query: (id: number) => ({
-                url: `/room/${id}`,
+            query: () => ({
+                url: `/rooms/room/`,
             })
         }),
         findRoom: builder.mutation<any, any>({
@@ -26,6 +26,13 @@ export const roomAPI = createApi({
                 params: {
                     search_value: roomName
                 }
+            })
+        }),
+        createRoom: builder.mutation<any, any>({
+            query: (body) => ({
+                url: '/rooms',
+                method: "POST",
+                body: body,
             })
         })
     })

@@ -3,7 +3,7 @@ import buttonStyle from "./Button.module.css";
 
 interface ButtonProps {
     type: "deny" | "accept";
-    children: string | number | ReactNode;
+    children?: string | number | ReactNode;
     onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
