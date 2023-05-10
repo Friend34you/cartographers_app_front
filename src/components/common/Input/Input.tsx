@@ -6,13 +6,20 @@ interface InputProps {
 
     onChange?: ChangeEventHandler<HTMLInputElement>;
     value?: any;
+    placeholder?: any;
 }
 
-const Input: FC<InputProps> = ({type, title, onChange, value}) => {
+const Input: FC<InputProps> = ({type, title, onChange, value, placeholder}) => {
     return (
         <div className={inputStyle.wrapper}>
             {title && <label>{title}</label>}
-            <input value={value} onChange={onChange} className={inputStyle.input} type={type}/>
+            <input
+                className={inputStyle.input}
+                value={value}
+                type={type}
+                onChange={onChange}
+                placeholder={placeholder}
+            />
         </div>
     );
 };

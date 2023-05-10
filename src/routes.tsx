@@ -1,6 +1,6 @@
 import {ALL_ROOMS_ROUTE, AUTH_ROUTE, ROOM_ROUTE} from "./utils/consts";
 import Rooms from "./components/Rooms/Rooms";
-import Auth from "./components/Auth";
+import Auth from "./components/Auth/Auth";
 import Room from "./components/Rooms/Room/Room";
 
 

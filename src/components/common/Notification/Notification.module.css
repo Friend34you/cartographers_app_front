@@ -10,9 +10,10 @@
     left: 0;
     width: fit-content;
     height: 40px;
-    background-color: #dedcdc;
+    background-color: #cecece;
     transform: translateX(-300px);
     transition: .3s ease-in;
+
 }
 
 .notification.active {

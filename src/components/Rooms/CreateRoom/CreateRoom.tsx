@@ -8,30 +8,40 @@ interface CreateRoomProps {
     setModal: Function;
 }
 
-const CreateRoom:FC<CreateRoomProps> = ({setModal}) => {
+const CreateRoom: FC<CreateRoomProps> = ({setModal}) => {
     const [title, setTitle] = useState("")
     const [createRoom, {data}] = roomAPI.useCreateRoomMutation()
-
-    async function handlerAccept() {
-        await createRoom({name: title, max_users: 2})
+    const [selectValue, setSelectValue] = useState("2")
+    async function handleAccept() {
+        console.log(title)
+        console.log(selectValue)
+        // await createRoom({name: title, max_users: 2})
     }
 
-    async function handlerDeny() {
+    async function handleDeny() {
         setModal(false);
         setTitle("");
     }
 
-    function handlerTitle(e: React.ChangeEvent<HTMLInputElement>) {
+    function handleTitle(e: React.ChangeEvent<HTMLInputElement>) {
         setTitle(e.target.value)
+    }
+
+    function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        setSelectValue(e.target.value)
     }
 
     return (
         <div className={createRoomStyle.container}>
             <h1>Создание комнаты</h1>
             <section className={createRoomStyle.inputs_wrapper}>
-                <Input value={title} onChange={handlerTitle} type={"text"} title={"Название:"}/>
+                <Input value={title} onChange={handleTitle} type={"search"} title={"Название:"}/>
                 Число игроков:
-                <select className={createRoomStyle.select}>
+                <select
+                    className={createRoomStyle.select}
+                    value={selectValue}
+                    onChange={handleSelectChange}
+                >
                     <option value={2}>2</option>
                     <option value={3}>3</option>
                     <option value={4}>4</option>
@@ -42,8 +52,8 @@ const CreateRoom:FC<CreateRoomProps> = ({setModal}) => {
                 <Input type={"password"} title={"Пароль (опционально)"}/>
             </section>
             <section className={createRoomStyle.buttons_wrapper}>
-                <Button type={"deny"} onClick={handlerDeny}>Отмена</Button>
-                <Button type={"accept"} onClick={handlerAccept}>Принять</Button>
+                <Button type={"deny"} onClick={handleDeny}>Отмена</Button>
+                <Button type={"accept"} onClick={handleAccept}>Создать</Button>
             </section>
         </div>
     );
