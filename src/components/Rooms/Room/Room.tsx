@@ -51,11 +51,11 @@ const Room: FC = () => {
                     </div>
                     <div className={roomStyle.buttons_wrapper}>
                         <Link to={ALL_ROOMS_ROUTE}>
-                            <Button type={"deny"}>
+                            <Button colorType={"deny"}>
                                 Покинуть комнату
                             </Button>
                         </Link>
-                        <Button type={"accept"}>
+                        <Button colorType={"accept"}>
                             Готов
                         </Button>
                     </div>

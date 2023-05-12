@@ -5,7 +5,7 @@ import useDebounce from "../../hooks/useDebounce";
 import {roomAPI} from "../../services/RoomService";
 import Modal from "../common/Modal/Modal";
 import UserIcon from "../common/UserIcon/UserIcon";
-import CreateRoom from "../Rooms/CreateRoom/CreateRoom";
+import CreateRoomForm from "./CreateRoomForm/CreateRoomForm";
 import Input from "../common/Input/Input";
 
 const Navbar = () => {
@@ -26,20 +26,24 @@ const Navbar = () => {
             <div className={navbarStyle.navbar}>
                 <div className={navbarStyle.actions}>
                     <Button
-                        type={"accept"}
+                        colorType={"accept"}
                         onClick={() => setCreateRoomModal(true)}
                     >
                         Создать комнату
                     </Button>
                     <Button
-                        type={"accept"}
+                        colorType={"accept"}
                         onClick={() => setCodeEnterModal(true)}
                     >
                         Войти по Коду
                     </Button>
                 </div>
                 <div className={navbarStyle.input_wrapper}>
-                    <Input placeholder={"Введите название / id комнаты..."} value={searchValue} onChange={handlerChange} type="search"/>
+                    <Input placeholder={"Введите название / id комнаты..."}
+                           value={searchValue}
+                           onChange={handlerChange}
+                           type="search"
+                    />
                 </div>
                 <UserIcon/>
                 {/*<div className={navbarStyle.profile}></div>*/}
@@ -52,14 +56,14 @@ const Navbar = () => {
                     placeholder={"Введите invite-code..."}
                 />
                 <Button
-                    type={"accept"}
+                    colorType={"accept"}
                     onClick={() => setCodeEnterModal(true)}
                 >
                     Войти
                 </Button>
             </Modal>
             <Modal active={createRoomModal} setActive={setCreateRoomModal}>
-                <CreateRoom setModal={setCreateRoomModal}/>
+                <CreateRoomForm setModal={setCreateRoomModal}/>
             </Modal>
             <div>{data && data[0]}</div>
         </>

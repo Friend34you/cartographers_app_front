@@ -1,0 +1,34 @@
+.container {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.name {
+    left: 1%;
+    position: absolute;
+    font-size: 110px;
+    user-select: none;
+    line-height: 100px;
+}
+
+.item2 {
+    color: white;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    background-color: white;
+    padding: 20px;
+}
+
+.img_wrapper {
+    width: 100vw;
+    height: inherit;
+    overflow: hidden;
+    background-image: url("./../../static/Cartographers A Roll Player Tale.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: -35px;
+
+}

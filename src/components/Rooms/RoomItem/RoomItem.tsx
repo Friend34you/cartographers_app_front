@@ -32,13 +32,13 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
                     {
                         room.contains_password
                             ? <Button
-                                type={"accept"}
+                                colorType={"accept"}
                                 onClick={onClick}>
                                 Войти
                             </Button>
                             : <Link to={ROOM_ROUTE + room.room_id}>
                                 <Button
-                                    type={"accept"}
+                                    colorType={"accept"}
                                     onClick={onClick}>
                                     Войти
                                 </Button>
@@ -53,7 +53,7 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
                 <Input type={"password"} title={"Пароль:"} placeholder={"Введите пароль..."}/>
                 <Link to={ROOM_ROUTE + room.room_id}>
                     <Button
-                        type={"accept"}>
+                        colorType={"accept"}>
                         Войти
                     </Button>
                 </Link>

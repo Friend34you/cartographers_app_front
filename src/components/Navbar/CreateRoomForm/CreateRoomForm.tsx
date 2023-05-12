@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import Button from "../../common/Button/Button";
-import createRoomStyle from "./CreateRoom.module.css"
+import createRoomStyle from "./CreateRoomForm.module.css"
 import Input from "../../common/Input/Input";
 import {roomAPI} from "../../../services/RoomService";
 
@@ -8,7 +8,7 @@ interface CreateRoomProps {
     setModal: Function;
 }
 
-const CreateRoom: FC<CreateRoomProps> = ({setModal}) => {
+const CreateRoomForm: FC<CreateRoomProps> = ({setModal}) => {
     const [title, setTitle] = useState("")
     const [createRoom, {data}] = roomAPI.useCreateRoomMutation()
     const [selectValue, setSelectValue] = useState("2")
@@ -52,11 +52,11 @@ const CreateRoom: FC<CreateRoomProps> = ({setModal}) => {
                 <Input type={"password"} title={"Пароль (опционально)"}/>
             </section>
             <section className={createRoomStyle.buttons_wrapper}>
-                <Button type={"deny"} onClick={handleDeny}>Отмена</Button>
-                <Button type={"accept"} onClick={handleAccept}>Создать</Button>
+                <Button colorType={"deny"} onClick={handleDeny}>Отмена</Button>
+                <Button colorType={"accept"} onClick={handleAccept}>Создать</Button>
             </section>
         </div>
     );
 };
 
-export default CreateRoom;
+export default CreateRoomForm;

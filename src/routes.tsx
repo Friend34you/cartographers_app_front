@@ -5,7 +5,6 @@ import Room from "./components/Rooms/Room/Room";
 
 
 interface Routes {
-
     path: string;
     Component: JSX.Element
 }

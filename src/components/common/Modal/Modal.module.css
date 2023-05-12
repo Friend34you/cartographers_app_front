@@ -15,6 +15,7 @@
 }
 
 .modal__content {
+    position: relative;
     min-width: 350px;
     padding: 30px;
     border-radius: 12px;
@@ -24,4 +25,13 @@
 .modal.active {
     opacity: 1;
     pointer-events: all;
+}
+
+.close {
+    width: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 15px;
+    cursor: pointer;
 }
