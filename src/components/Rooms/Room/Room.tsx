@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import Button from "../../common/Button/Button";
 import {Link} from "react-router-dom";
-import {ALL_ROOMS_ROUTE} from "../../../utils/consts";
+import {ALL_ROOMS_ROUTE, GAME_ROUTE} from "../../../utils/consts";
 import roomStyle from "./Room.module.css"
 import UserIcon from "../../common/UserIcon/UserIcon";
 import copyImg from "../../../static/copy.png"
@@ -11,6 +11,7 @@ import kickUser from "./../../../static/close_red.png"
 const Room: FC = () => {
     const [inviteCode, setInviteCode] = useState('*здесь будет код*')
     const [notificationActive, setNotificationActive] = useState(false)
+
     async function handlerOnClick() {
         await navigator.clipboard.writeText(inviteCode)
         setNotificationActive(true);
@@ -58,9 +59,11 @@ const Room: FC = () => {
                                 Покинуть комнату
                             </Button>
                         </Link>
-                        <Button colorType={"accept"}>
-                            Готов
-                        </Button>
+                        <Link to={GAME_ROUTE}>
+                            <Button colorType={"accept"}>
+                                Готов
+                            </Button>
+                        </Link>
                     </div>
                 </section>
             </div>
