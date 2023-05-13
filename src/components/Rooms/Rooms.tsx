@@ -19,23 +19,16 @@ const Rooms: React.FC = () => {
     })
     return (
         <>
-            {/*<button onClick={() => setModalActive(true)}>Открыть модалку</button>*/}
             <Navbar/>
             <div ref={parentRef} className={navbarStyle.rooms_container}>
-                {/*{isLoading && <div style={{width: "100%", height: "100vh", backgroundColor: "red"}}></div>}*/}
                 {rooms && rooms.map(room =>
                     <RoomItem
                         key={room.room_id}
                         room={room}
-                        // setModalActive={setModalActive}
-                        // modalActive={modalActive}
                     />
                 )}
                 <div ref={childRef} style={{width: '100vw', height: "20px", backgroundColor: "green"}}></div>
             </div>
-            {/*<Modal active={modalActive} setActive={setModalActive}>*/}
-
-            {/*</Modal>*/}
         </>
     );
 };

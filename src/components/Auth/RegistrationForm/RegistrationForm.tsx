@@ -1,19 +1,28 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import registrationStyle from "./RegistrationForm.module.css";
 import Button from "../../common/Button/Button";
 import {useForm} from "react-hook-form";
+import view from "./../../../static/view.png"
+import hide from "./../../../static/hide.png"
 
 const RegistrationForm: FC = () => {
     const {register, watch, handleSubmit, reset, formState: {errors}} = useForm({
         mode: "onBlur",
-
     });
+    const [passwordShown, setPasswordShown] = useState(false);
+    const eye = passwordShown
+        ? hide
+        : view
     const onSubmit = (data: object) => {
         reset();
     }
 
     function clearFields() {
         reset();
+    }
+
+    function togglePasswordVisibility() {
+        setPasswordShown(prev => !prev)
     }
 
     return (
@@ -52,19 +61,26 @@ const RegistrationForm: FC = () => {
                             {errors?.password?.message as string}
                         </p>}
                 </span>
-                <input className={registrationStyle.input}
-                       type="password"
-                       placeholder="Password" {...register("password", {
-                    required: "Поле обязательно к заполнению",
-                    minLength: {
-                        value: 8,
-                        message: "Минимум 8 символов"
-                    },
-                    maxLength: {
-                        value: 30,
-                        message: "Максимум 30 символов"
-                    },
-                })} />
+                <div className={registrationStyle.input_wrapper}>
+                    <input className={registrationStyle.input}
+                           type={passwordShown ? "text" : "password"}
+                           placeholder="Password" {...register("password", {
+                        required: "Поле обязательно к заполнению",
+                        minLength: {
+                            value: 8,
+                            message: "Минимум 8 символов"
+                        },
+                        maxLength: {
+                            value: 30,
+                            message: "Максимум 30 символов"
+                        },
+                    })} />
+                    <img
+                        className={registrationStyle.image}
+                        src={eye} alt={"eye"}
+                        onClick={togglePasswordVisibility}
+                    />
+                </div>
 
 
                 <span className={registrationStyle.message_wrapper}>

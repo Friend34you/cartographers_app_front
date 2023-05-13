@@ -8,16 +8,15 @@
     background-color: #F3F3F3;
     border: none;
     transition: .1s linear;
-
 }
 
 .input:hover {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
 }
 
 .input:focus {
     outline: none;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
 }
 
 .input::placeholder {
@@ -50,4 +49,22 @@
     width: inherit;
     display: flex;
     justify-content: space-between;
+}
+
+.input_wrapper {
+    position: relative;
+}
+
+.image {
+    opacity: 0.7;
+    position: absolute;
+    width: 25px;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.image:hover {
+    opacity: 1;
 }

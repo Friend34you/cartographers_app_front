@@ -9,8 +9,6 @@ import Input from "../../common/Input/Input";
 
 interface RoomItemProps {
     room: IRoom;
-    // modalActive: boolean;
-    // setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const RoomItem: FC<RoomItemProps> = ({room}) => {
@@ -51,12 +49,14 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
                 <h1>{room.room_name}</h1>
                 <p>{room.current_users} / {room.max_users}</p>
                 <Input type={"password"} title={"Пароль:"} placeholder={"Введите пароль..."}/>
+
                 <Link to={ROOM_ROUTE + room.room_id}>
                     <Button
                         colorType={"accept"}>
                         Войти
                     </Button>
                 </Link>
+
             </Modal>
         </>
     );

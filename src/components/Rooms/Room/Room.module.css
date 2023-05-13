@@ -22,7 +22,7 @@ body {
     width: 30vw;
     background: #FFFFFF;
     border-radius: 14px;
-    padding: 30px;
+    padding: 25px;
     margin: 10px 0;
 }
 
@@ -43,10 +43,10 @@ body {
 }
 
 .user {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: #14A0DC;
     height: 50px;
     margin: 10px 0;
     padding: 10px;
@@ -64,7 +64,19 @@ body {
 }
 
 .copy_img {
+    position: relative;
     width: 25px;
     cursor: pointer;
 }
 
+.kick_user {
+    width: 20px;
+    position: absolute;
+    right: 12px;
+    opacity: .5;
+    cursor: pointer;
+}
+
+.kick_user:hover {
+    opacity: 1;
+}

@@ -50,3 +50,21 @@
     display: flex;
     justify-content: space-between;
 }
+
+.input_wrapper {
+    position: relative;
+}
+
+.image {
+    opacity: 0.7;
+    position: absolute;
+    width: 25px;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    transition: .1s linear;
+}
+
+.image:hover {
+    opacity: 1;
+}

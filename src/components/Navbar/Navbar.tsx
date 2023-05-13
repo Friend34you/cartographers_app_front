@@ -7,16 +7,18 @@ import Modal from "../common/Modal/Modal";
 import UserIcon from "../common/UserIcon/UserIcon";
 import CreateRoomForm from "./CreateRoomForm/CreateRoomForm";
 import Input from "../common/Input/Input";
+import InviteCodeEnterForm from "./InviteCodeEnterForm/InviteCodeEnterForm";
 
 const Navbar = () => {
     const [codeEnterModal, setCodeEnterModal] = useState(false);
     const [createRoomModal, setCreateRoomModal] = useState(false);
+    const [userOptionsVisibility, setUserOptionsVisibility] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [findRoom, {data}] = roomAPI.useFindRoomMutation()
     const debouncedCallback = useDebounce((value: string) => {
         return findRoom(value)
     }, 1000)
-    const handlerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(searchValue)
         setSearchValue(e.target.value);
         debouncedCallback(e.target.value)
@@ -24,7 +26,7 @@ const Navbar = () => {
     return (
         <>
             <div className={navbarStyle.navbar}>
-                <div className={navbarStyle.actions}>
+                <section className={navbarStyle.actions}>
                     <Button
                         colorType={"accept"}
                         onClick={() => setCreateRoomModal(true)}
@@ -37,35 +39,31 @@ const Navbar = () => {
                     >
                         Войти по Коду
                     </Button>
-                </div>
-                <div className={navbarStyle.input_wrapper}>
+                </section>
+                <section className={navbarStyle.input_wrapper}>
                     <Input placeholder={"Введите название / id комнаты..."}
                            value={searchValue}
-                           onChange={handlerChange}
+                           onChange={handleChange}
                            type="search"
                     />
-                </div>
-                <UserIcon/>
-                {/*<div className={navbarStyle.profile}></div>*/}
+                </section>
+                <section className={navbarStyle.user_wrapper} onClick={() => setUserOptionsVisibility(prev => !prev)}>
+                    <span>юзернейм</span>
+                    <UserIcon/>
+                </section>
+            </div>
+            <div className={userOptionsVisibility
+                ? `${navbarStyle.user_options} ${navbarStyle.active}`
+                : navbarStyle.user_options}
+            >
+                <Button colorType={"deny"}>Выйти</Button>
             </div>
             <Modal active={codeEnterModal} setActive={setCodeEnterModal}>
-                <h1>Войти с помощью Invite-code</h1>
-                <Input
-                    type={"search"}
-                    title={"Код приглашения:"}
-                    placeholder={"Введите invite-code..."}
-                />
-                <Button
-                    colorType={"accept"}
-                    onClick={() => setCodeEnterModal(true)}
-                >
-                    Войти
-                </Button>
+                <InviteCodeEnterForm/>
             </Modal>
             <Modal active={createRoomModal} setActive={setCreateRoomModal}>
                 <CreateRoomForm setModal={setCreateRoomModal}/>
             </Modal>
-            <div>{data && data[0]}</div>
         </>
 
     );

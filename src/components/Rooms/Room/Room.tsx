@@ -6,6 +6,7 @@ import roomStyle from "./Room.module.css"
 import UserIcon from "../../common/UserIcon/UserIcon";
 import copyImg from "../../../static/copy.png"
 import Notification from "../../common/Notification/Notification";
+import kickUser from "./../../../static/close_red.png"
 
 const Room: FC = () => {
     const [inviteCode, setInviteCode] = useState('*здесь будет код*')
@@ -26,6 +27,8 @@ const Room: FC = () => {
                         <div className={roomStyle.user}>
                             <UserIcon/>
                             Вовчик
+                            <img src={kickUser} alt="кикнуть"
+                                 className={roomStyle.kick_user}/>
                         </div>
                         <div className={roomStyle.user}>овчик</div>
                         <div className={roomStyle.user}>овчик</div>

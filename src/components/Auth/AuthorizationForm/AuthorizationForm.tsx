@@ -1,13 +1,19 @@
-import React from 'react';
-import registrationStyle from "../AuthorizationForm/AuthorizationForm.module.css";
+import React, {useState} from 'react';
+import authorizationStyle from "../AuthorizationForm/AuthorizationForm.module.css";
 import Button from "../../common/Button/Button";
 import {useForm} from "react-hook-form";
+import view from "./../../../static/view.png"
+import hide from "./../../../static/hide.png"
 
 const AuthorizationForm = () => {
     const {register, handleSubmit, reset, formState: {errors}} = useForm({
         mode: "onBlur",
 
     });
+    const [passwordShown, setPasswordShown] = useState(false);
+        const eye = passwordShown
+        ? hide
+        : view
     const onSubmit = (data: object) => {
         console.log(data);
         reset();
@@ -17,37 +23,50 @@ const AuthorizationForm = () => {
         reset();
     }
 
+    function togglePasswordVisibility() {
+        setPasswordShown(prev => !prev)
+    }
+
+
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)} className=
-                {registrationStyle.form}>
+                {authorizationStyle.form}>
                 <h1>Авторизация</h1>
-                <span className={registrationStyle.message_wrapper}>
+                <span className={authorizationStyle.message_wrapper}>
                     <label>Логин:</label>
                     {errors?.username &&
-                        <p className={registrationStyle.error}>
+                        <p className={authorizationStyle.error}>
                             {errors?.username?.message as string}
                         </p>}
                 </span>
-                <input className={registrationStyle.input} type="text" placeholder="Login" {...register("username", {
+                <input className={authorizationStyle.input} type="text" placeholder="Login" {...register("username", {
                     required: "Поле обязательно к заполнению",
                 })} />
 
 
-                <span className={registrationStyle.message_wrapper}>
+                <span className={authorizationStyle.message_wrapper}>
                     <label>Пароль:</label>
                     {errors?.password &&
-                        <p className={registrationStyle.error}>
+                        <p className={authorizationStyle.error}>
                             {errors?.password?.message as string}
                         </p>}
                 </span>
-                <input className={registrationStyle.input}
-                       type="password"
-                       placeholder="Password" {...register("password", {
-                    required: "Поле обязательно к заполнению",
-                })} />
+                <div className={authorizationStyle.input_wrapper}>
+                    <input className={authorizationStyle.input}
+                           type={passwordShown ? "text" : "password"}
+                           placeholder="Password" {...register("password", {
+                        required: "Поле обязательно к заполнению",
+                    })} />
+                    <img
+                        className={authorizationStyle.image}
+                        src={eye} alt={"eye"}
+                        onClick={togglePasswordVisibility}
+                    />
+                </div>
 
-                <div className={registrationStyle.buttons_wrapper}>
+
+                <div className={authorizationStyle.buttons_wrapper}>
                     <Button type={"submit"} colorType={"deny"} onClick={clearFields}>Очистить</Button>
                     <Button type={"submit"} colorType={"accept"}>Войти</Button>
                 </div>
