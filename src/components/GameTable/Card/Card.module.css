@@ -1,0 +1,14 @@
+.card {
+    border-radius: 15px;
+    width: inherit;
+    height: inherit;
+    min-width: 100px;
+    min-height: 150px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.img {
+    width: 600px;
+}

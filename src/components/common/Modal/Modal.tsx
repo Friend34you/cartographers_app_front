@@ -11,7 +11,7 @@ interface ModalProps {
 const Modal: FC<ModalProps> = ({active, setActive, children}) => {
     const modalActive = `${modalStyle.modal} ${modalStyle.active}`;
     const closeModal = () => setActive(false);
-    // const contentClick = (e: React.MouseEvent<HTMLElement>) => e.stopPropagation();
+    const contentClick = (e: React.MouseEvent<HTMLElement>) => e.stopPropagation();
 
     function escFunction(e:KeyboardEvent){
         if (e.key === "Escape") {
@@ -31,7 +31,7 @@ const Modal: FC<ModalProps> = ({active, setActive, children}) => {
         <div
             className={active ? modalActive : modalStyle.modal}
         >
-            <div className={modalStyle.modal__content}>
+            <div className={modalStyle.modal__content} onClick={contentClick}>
                 <img
                     className={modalStyle.close}
                     src={close}

@@ -18,7 +18,7 @@ const Navbar = () => {
     const debouncedCallback = useDebounce((value: string) => {
         return findRoom(value)
     }, 1000)
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(searchValue)
         setSearchValue(e.target.value);
         debouncedCallback(e.target.value)
@@ -43,7 +43,7 @@ const Navbar = () => {
                 <section className={navbarStyle.input_wrapper}>
                     <Input placeholder={"Введите название / id комнаты..."}
                            value={searchValue}
-                           onChange={handleChange}
+                           onChange={handleInputChange}
                            type="search"
                     />
                 </section>

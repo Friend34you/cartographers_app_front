@@ -1,0 +1,6 @@
+.field {
+    width: calc(40px*12);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
