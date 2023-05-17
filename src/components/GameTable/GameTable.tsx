@@ -4,10 +4,11 @@ import playersIcon from "../../static/players.svg"
 import field from "../../static/field.png"
 import {Link} from "react-router-dom";
 import {ALL_ROOMS_ROUTE} from "../../utils/consts";
-import TaskCard from "./TaskCard/TaskCard";
+import TaskCard from "./Card/TaskCard/TaskCard";
 import gameTableStyle from "./GameTable.module.css"
 import Card from "./Card/Card";
 import Field from "./Field/Field";
+import CardFigure from "./Figure/CardFigure";
 
 const GameTable: FC = () => {
     return (
@@ -35,6 +36,7 @@ const GameTable: FC = () => {
                     <TaskCard letter={"C"}/>
                     <TaskCard letter={"D"}/>
                 </div>
+                <CardFigure/>
             </section>
         </div>
     );

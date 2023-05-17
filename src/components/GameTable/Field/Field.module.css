@@ -1,6 +1,8 @@
 .field {
-    width: calc(40px*12);
+    width: calc(39px*12);
     display: flex;
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 20px 30px;
+    position: absolute;
+    z-index: 1;
 }

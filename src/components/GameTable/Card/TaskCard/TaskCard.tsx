@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import taskStyle from "./TaskCard.module.css"
-import Card from "../Card/Card";
+import Card from "../Card";
 
 interface TaskCardProps {
     letter: string;
