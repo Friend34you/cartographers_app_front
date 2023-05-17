@@ -1,5 +1,7 @@
 import React, {FC} from 'react';
 import cellStyle from "./Cell.module.css"
+import Board from "../../../../models/Board";
+import {setFigureOnField} from "../../../../gameLogic/setFigureOnField";
 
 interface CellProps {
     type: number;
@@ -9,9 +11,17 @@ interface CellProps {
         x: number;
         y: number;
     }
+
+    field?: Board;
+    updateField?: Function
 }
 
-const Cell: FC<CellProps> = ({type, x, y, dragCell}) => {
+const Cell: FC<CellProps> = ({type,
+                                 x,
+                                 y,
+                                 dragCell,
+                             field,
+                             updateField}) => {
 
     function testHandle(e:React.MouseEvent) {
         // const el = document.elementFromPoint(e.clientX, e.clientY);
@@ -29,8 +39,13 @@ const Cell: FC<CellProps> = ({type, x, y, dragCell}) => {
             onDrop={(e)=>{
                 e.preventDefault()
                 console.log(e.target)
-                const bla = e.dataTransfer.getData("string")
-                console.log(JSON.parse(bla))
+                let figureData = e.dataTransfer.getData("data")
+                const data = JSON.parse(figureData)
+
+                setFigureOnField(data.figure, data.x, data.y, field?.cells, x, y)
+                console.log("данные", data.figure, data.x, data.y, field?.cells, x, y)
+                updateField!();
+
             }}
             onDragOver={(e: any) => {
                 e.preventDefault()

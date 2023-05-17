@@ -1,18 +1,19 @@
 import React, {useState} from 'react';
 import Figure from "../../../models/Figure";
 import Cell from "../Field/Cell/Cell";
+import rotateLeftIcon from "./../../../static/rotate-left.png"
 
 const CardFigure = () => {
-    const dragCell = {
-        x: 0,
-        y: 0
-    }
     const mas = [
         [1, 0, 1],
         [1, 1, 1,],
         [1, 1, 1,]]
     const [figure, setFigure] = useState({cells: mas})
-
+    const dragCell = {
+        x: 0,
+        y: 0,
+        figure: figure.cells
+    }
     function testHandle(e: React.MouseEvent) {
         const el = document.elementFromPoint(e.clientX, e.clientY);
         console.log("CAPTURE", el)
@@ -24,18 +25,20 @@ const CardFigure = () => {
 
     return (
         <section>
-            <div style={{height: "20px", width: "20px", backgroundColor: "blue"}}
+            <div style={{height: "30px", width: "30px", margin: "10px"}}
                  onClick={() => {
                      setFigure(prev => ({...prev, cells: rotateLeft(prev.cells)}))
                      console.log(figure)
                  }}
-            />
+            >
+                <img src={rotateLeftIcon} style={{width: "inherit"}}  alt=""/>
+            </div>
             <div style={{width: "fit-content", height: "fit-content", border: "2px blue solid"}}
 
                  draggable={true}
                  onDragStart={(e: React.DragEvent) => {
 
-                     console.log("start", e.dataTransfer.setData("string", JSON.stringify(dragCell)))
+                     console.log("start", e.dataTransfer.setData("data", JSON.stringify(dragCell)))
                  }}
             >
                 {figure.cells.map((el, y) =>
@@ -49,3 +52,5 @@ const CardFigure = () => {
 };
 
 export default CardFigure;
+
+//еслм y фигуры больше чем y поля - нельзя
