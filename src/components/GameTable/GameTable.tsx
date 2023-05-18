@@ -1,22 +1,33 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Button from "../common/Button/Button";
 import playersIcon from "../../static/players.svg"
-import field from "../../static/field.png"
+import fieldImg from "../../static/field.png"
 import {Link} from "react-router-dom";
 import {ALL_ROOMS_ROUTE} from "../../utils/consts";
 import TaskCard from "./Card/TaskCard/TaskCard";
 import gameTableStyle from "./GameTable.module.css"
 import Card from "./Card/Card";
-import Field from "./Field/Field";
+import BoardComponent from "./Field/BoardComponent";
 import CardFigure from "./Figure/CardFigure";
+import Board from "../../models/Board";
 
 const GameTable: FC = () => {
+    const [field, setField] = useState(new Board())
+
+    useEffect(() => {
+        const newField = new Board();
+        newField.initCells();
+        newField.cells[0][0] = 1;
+        setField(newField)
+    }, [])
+
+
     return (
         <div className={gameTableStyle.container}>
             <section className={gameTableStyle.field_wrapper}>
                 <h1>Название игры</h1>
-                <Field/>
-                <img src={field} alt="" className={gameTableStyle.field_img}/>
+                <BoardComponent board={field} setField={setField}/>
+                <img src={fieldImg} alt="" className={gameTableStyle.field_img}/>
             </section>
             <section className={gameTableStyle.interactions_wrapper}>
                 <div className={gameTableStyle.season}>

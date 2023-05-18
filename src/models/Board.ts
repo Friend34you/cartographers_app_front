@@ -30,4 +30,8 @@ export default class Board {
         newBoard.cells = this.cells
         return newBoard;
     }
+
+    public getCells() {
+        console.log(this.cells)
+    }
 }

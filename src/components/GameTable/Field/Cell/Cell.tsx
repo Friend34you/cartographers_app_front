@@ -42,16 +42,22 @@ const Cell: FC<CellProps> = ({type,
                 let figureData = e.dataTransfer.getData("data")
                 const data = JSON.parse(figureData)
 
-                setFigureOnField(data.figure, data.x, data.y, field?.cells, x, y)
-                console.log("данные", data.figure, data.x, data.y, field?.cells, x, y)
-                updateField!();
-
+                const testField = setFigureOnField(data.figure, data.x, data.y, field?.cells, x, y)
+                console.log(testField)
+                const newBoard = new Board();
+                newBoard.cells = testField;
+                console.log(newBoard)
+                console.log(field?.cells)
+                updateField!(newBoard)
+                // // console.log("данные", data.figure, data.x, data.y, field?.cells, x, y)
+                // field?.getCells()
             }}
             onDragOver={(e: any) => {
                 e.preventDefault()
                 e.target.style.background = "grey"
             }}
             onDragLeave={(e: any) => {
+                e.preventDefault()
                 e.target.style.background = "transparent"
             }}
             onMouseDown={testHandle}
