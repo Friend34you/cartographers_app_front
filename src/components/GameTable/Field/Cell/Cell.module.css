@@ -2,7 +2,30 @@
     display: inline-block;
     width: 39px;
     height: 39px;
-    border: 1px solid black;
     padding: 0;
     margin: 0;
+}
+
+.empty {
+    background: transparent;
+}
+
+.forest {
+    background: green;
+}
+
+.village {
+    background: red;
+}
+
+.river {
+    background: cornflowerblue;
+}
+
+.field {
+    background: wheat;
+}
+
+.mountain {
+    background: brown;
 }

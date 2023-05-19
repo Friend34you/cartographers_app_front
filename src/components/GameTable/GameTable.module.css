@@ -43,7 +43,7 @@
     margin: 10px;
 }
 
-.field_wrapper * {
+.field_wrapper > * {
     margin: 10px;
 }
 

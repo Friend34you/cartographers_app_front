@@ -12,21 +12,30 @@ import CardFigure from "./Figure/CardFigure";
 import Board from "../../models/Board";
 
 const GameTable: FC = () => {
-    const [field, setField] = useState(new Board())
+    const [board, setBoard] = useState(new Board())
 
     useEffect(() => {
-        const newField = new Board();
-        newField.initCells();
-        newField.cells[0][0] = 1;
-        setField(newField)
+        restart()
     }, [])
 
+    function restart() {
+        const newBoard = new Board();
+        newBoard.initCells();
+        newBoard.cells[1][3] = 5;
+        setBoard(newBoard)
+    }
+
+    function updateBoard() {
+        const newBoard = new Board();
+        newBoard.cells = board.cells;
+        setBoard(newBoard)
+    }
 
     return (
         <div className={gameTableStyle.container}>
             <section className={gameTableStyle.field_wrapper}>
                 <h1>Название игры</h1>
-                <BoardComponent board={field} setField={setField}/>
+                <BoardComponent board={board} updateBoard={updateBoard}/>
                 <img src={fieldImg} alt="" className={gameTableStyle.field_img}/>
             </section>
             <section className={gameTableStyle.interactions_wrapper}>

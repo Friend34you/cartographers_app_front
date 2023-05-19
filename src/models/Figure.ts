@@ -1,7 +1,7 @@
 import Cell from "./Cell";
 
 export default class Figure {
-    cells:  number[][]
+    cells:  number[][] = []
 
 
     constructor(cells: number[][]) {

@@ -1,68 +1,34 @@
 import React, {FC} from 'react';
 import cellStyle from "./Cell.module.css"
-import Board from "../../../../models/Board";
-import {setFigureOnField} from "../../../../gameLogic/setFigureOnField";
+
 
 interface CellProps {
     type: number;
-    x?: number;
-    y?: number;
-    dragCell?: {
-        x: number;
-        y: number;
-    }
-
-    field?: Board;
-    updateField?: Function
 }
 
-const Cell: FC<CellProps> = ({type,
-                                 x,
-                                 y,
-                                 dragCell,
-                             field,
-                             updateField}) => {
+const Cell: FC<CellProps> = ({type}) => {
 
-    function testHandle(e:React.MouseEvent) {
-        // const el = document.elementFromPoint(e.clientX, e.clientY);
-        // console.log("CAPTURE",el)
-        console.log(x)
-        console.log(y)
-        dragCell && (dragCell.x = x!);
-        dragCell && (dragCell.y = y!)
-        console.log(dragCell)
+    function getCellStyle(type: number) {
+        switch (type) {
+            case 0:
+                return  cellStyle.empty
+            case 1:
+                return  cellStyle.forest
+            case 2:
+                return  cellStyle.village
+            case 3:
+                return  cellStyle.river
+            case 4:
+                return  cellStyle.field
+            case 5:
+                return  cellStyle.mountain
+        }
     }
 
-    return (
-        <div
-            className={cellStyle.cell}
-            onDrop={(e)=>{
-                e.preventDefault()
-                console.log(e.target)
-                let figureData = e.dataTransfer.getData("data")
-                const data = JSON.parse(figureData)
+    const cellType = getCellStyle(type)
 
-                const testField = setFigureOnField(data.figure, data.x, data.y, field?.cells, x, y)
-                console.log(testField)
-                const newBoard = new Board();
-                newBoard.cells = testField;
-                console.log(newBoard)
-                console.log(field?.cells)
-                updateField!(newBoard)
-                // // console.log("данные", data.figure, data.x, data.y, field?.cells, x, y)
-                // field?.getCells()
-            }}
-            onDragOver={(e: any) => {
-                e.preventDefault()
-                e.target.style.background = "grey"
-            }}
-            onDragLeave={(e: any) => {
-                e.preventDefault()
-                e.target.style.background = "transparent"
-            }}
-            onMouseDown={testHandle}
-        >
-            {type}
+    return (
+        <div className={`${cellStyle.cell}  ${cellType}`}>
         </div>
     );
 };
