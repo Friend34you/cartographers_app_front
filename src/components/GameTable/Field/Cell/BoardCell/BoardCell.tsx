@@ -3,7 +3,7 @@ import Cell from "../Cell";
 import Board from "../../../../../models/Board";
 import {setFigureOnField} from "../../../../../gameLogic/setFigureOnField";
 import boardCellStyle from "./BoardCell.module.css";
-
+import pencilSound from "./../../../../../static/sounds/pencil_draw.mp3"
 interface BoardCellProps {
     x: number;
     y: number;
@@ -13,6 +13,7 @@ interface BoardCellProps {
 }
 
 const BoardCell:FC<BoardCellProps> = ({y, x, type, field, updateBoard}) => {
+
     return (
         <div
             onDragOver={(e: any) => {

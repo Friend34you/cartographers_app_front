@@ -5,6 +5,7 @@
 }
 
 .interactions_wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
 }
@@ -49,4 +50,12 @@
 
 .tasks {
     display: flex;
+}
+
+.turn_buttons_wrapper {
+    padding: 20px 0;
+    height: 100px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }

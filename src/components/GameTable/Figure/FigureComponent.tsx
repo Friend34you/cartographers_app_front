@@ -1,20 +1,29 @@
-import React, {useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Figure from "../../../models/Figure";
 import rotateLeftIcon from "./../../../static/rotate-left.png"
 import FigureCell from "../Field/Cell/FigureCell/FigureCell";
-import cardFigureStyle from "./CardFigure.module.css"
+import cardFigureStyle from "./FigureComponent.module.css"
 
-const CardFigure = () => {
+interface FigureProps {
+    type: number;
+}
+
+const FigureComponent:FC<FigureProps> = ({type}) => {
     const mas = [
-        [3, 0, 3],
-        [3, 3, 3,],
-        [3, 0, 3,]]
+        [type, 0, type],
+        [type, type, type,],
+        [type, 0, type,]]
     const [figure, setFigure] = useState(new Figure(mas))
     const dragCell = {
         x: 0,
         y: 0,
         figure: figure.cells
     }
+
+    useEffect(() => {
+        const newFigure = new Figure(mas)
+        setFigure(newFigure)
+    },[type])
 
     function updateFigure() {
         const newFigure = new Figure(figure.cells);
@@ -57,6 +66,6 @@ const CardFigure = () => {
     );
 };
 
-export default CardFigure;
+export default FigureComponent;
 
 //еслм y фигуры больше чем y поля - нельзя

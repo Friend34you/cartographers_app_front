@@ -1,3 +1,5 @@
+import {soundClick} from "./soundClick";
+
 export function setFigureOnField(figure: number[][],
                                  figureCellX: number,
                                  figureCellY: number,
@@ -50,6 +52,7 @@ export function setFigureOnField(figure: number[][],
         figureCol++
         figureRow = 0;
     }
+    soundClick()
     return newField
 }
 

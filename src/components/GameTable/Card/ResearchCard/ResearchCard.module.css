@@ -1,0 +1,49 @@
+.container {
+    margin: 15px;
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    min-height: 290px;
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-repeat: no-repeat;
+    -moz-background-size: cover;
+}
+
+.container > * {
+    margin: 10px;
+}
+
+.cells_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.cells_wrapper > * {
+    margin: 5px;
+}
+
+.figures_wrapper {
+    padding: 10px;
+    border: 2px black solid;
+    border-radius: 10px;
+    mask-image: element();
+    display: flex;
+    flex-direction: row;
+}
+
+.figures_wrapper > * {
+    margin: 5px;
+}
+
+.card_wrapper {
+    height: 220px;
+    width: 150px;
+}
+
+.interactions {
+    display: flex;
+    flex-direction: column;
+}

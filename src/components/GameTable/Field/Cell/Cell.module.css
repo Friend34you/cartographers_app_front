@@ -4,6 +4,7 @@
     height: 39px;
     padding: 0;
     margin: 0;
+    transition: .1s linear;
 }
 
 .empty {
@@ -12,20 +13,41 @@
 
 .forest {
     background: green;
+    background-image: url("/src/static/environmentTypes/forest.PNG");
+
 }
 
 .village {
     background: red;
+    background-image: url("/src/static/environmentTypes/village.PNG");
+
 }
 
 .river {
     background: cornflowerblue;
+    background-image: url("/src/static/environmentTypes/river.PNG");
+
 }
 
 .field {
     background: wheat;
+    background-image: url("/src/static/environmentTypes/field.PNG");
+
 }
 
 .mountain {
     background: brown;
+    background-image: url("/src/static/environmentTypes/mountain.PNG");
+
+}
+
+.monster {
+    background: darkviolet;
+    background-image: url("/src/static/environmentTypes/monster.PNG");
+
+}
+
+.field, .forest, .monster, .mountain, .river, .village {
+    background-repeat: no-repeat;
+    background-size: cover;
 }
