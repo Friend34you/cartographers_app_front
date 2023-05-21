@@ -27,9 +27,9 @@
 
 .figures_wrapper {
     padding: 10px;
-    border: 2px black solid;
+    border: 3px black solid;
     border-radius: 10px;
-    mask-image: element();
+
     display: flex;
     flex-direction: row;
 }

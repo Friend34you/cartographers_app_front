@@ -17,20 +17,17 @@
 }
 
 .buttons_wrapper {
-    right: 0;
-    top: 0;
     width: fit-content;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 
 .playersIcon {
-    width: 60px;
-    margin: 15px;
+    width: 45px;
+    margin: 10px;
 }
-
 
 .field_img {
     position: relative;

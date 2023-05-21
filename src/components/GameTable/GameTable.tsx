@@ -1,20 +1,21 @@
 import React, {FC, useEffect, useState} from 'react';
-import Button from "../common/Button/Button";
+import gameTableStyle from "./GameTable.module.css"
 import playersIcon from "../../static/players.svg"
 import fieldImg from "../../static/field.png"
 import {Link} from "react-router-dom";
 import {ALL_ROOMS_ROUTE} from "../../utils/consts";
-import TaskCard from "./Card/TaskCard/TaskCard";
-import gameTableStyle from "./GameTable.module.css"
-import BoardComponent from "./Field/BoardComponent";
-import FigureComponent from "./Figure/FigureComponent";
+import Button from "../common/Button/Button";
 import Board from "../../models/Board";
+import BoardComponent from "./Field/BoardComponent";
+import TaskCard from "./Card/TaskCard/TaskCard";
 import SeasonCard from "./Card/SeasonCard/SeasonCard";
 import ResearchCard from "./Card/ResearchCard/ResearchCard";
+import backgroundSound from "./../../static/sounds/backgroundMusic/romantic music.mp3"
+import Player from "../common/Player/Player";
+
 
 const GameTable: FC = () => {
     const [board, setBoard] = useState(new Board())
-
     useEffect(() => {
         restart()
     }, [])
@@ -34,7 +35,6 @@ const GameTable: FC = () => {
 
     return (
         <div className={gameTableStyle.container}>
-            <audio src={}/>
             <section className={gameTableStyle.field_wrapper}>
                 <h1>Название игры</h1>
                 <BoardComponent board={board} updateBoard={updateBoard}/>
@@ -55,11 +55,12 @@ const GameTable: FC = () => {
                                 Выйти
                             </Button>
                         </Link>
+                        <Player url={backgroundSound}/>
                         <img className={gameTableStyle.playersIcon} src={playersIcon} alt="игроки"/>
                     </section>
                 </div>
                 {/*<FigureComponent/>*/}
-                <ResearchCard environment1={3} environment2={4} figure1={[[1,0,1,0],[1,1,1,1]]}/>
+                <ResearchCard environment1={3} environment2={4} figure1={[[1, 0, 1, 0], [1, 1, 1, 1]]}/>
                 <div className={gameTableStyle.turn_buttons_wrapper}>
                     <Button colorType={"deny"} type={"button"}>
                         Отменить действие

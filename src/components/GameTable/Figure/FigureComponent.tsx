@@ -10,9 +10,9 @@ interface FigureProps {
 
 const FigureComponent:FC<FigureProps> = ({type}) => {
     const mas = [
-        [type, 0, type],
-        [type, type, type,],
-        [type, 0, type,]]
+        [0, type, 0,],
+        [type, type, type],
+        [type, 0, type]]
     const [figure, setFigure] = useState(new Figure(mas))
     const dragCell = {
         x: 0,
