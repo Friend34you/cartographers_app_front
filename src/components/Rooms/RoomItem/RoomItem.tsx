@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import {IRoom} from "../../../models/IRoom";
-import roomStyle from "./RoomItem.module.css"
+import s from "./RoomItem.module.css"
 import Modal from "../../common/Modal/Modal";
 import Button from "../../common/Button/Button";
 import {Link} from "react-router-dom";
@@ -22,11 +22,11 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
 
     return (
         <>
-            <div className={roomStyle.item}>
+            <div className={s.item}>
                 <h2>{room.room_name}</h2>
                 <p>{room.current_users} / {room.max_users}</p>
                 <p>С паролем: {room.contains_password ? "Да" : "нет"}</p>
-                <div className={roomStyle.button_container}>
+                <div className={s.button_container}>
                     {
                         room.contains_password
                             ? <Button

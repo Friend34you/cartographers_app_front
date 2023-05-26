@@ -1,5 +1,5 @@
 import React, {ChangeEventHandler, FC} from 'react';
-import inputStyle from "./Input.module.css"
+import s from "./Input.module.css"
 interface InputProps extends  React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>{
     title?: string;
     type: React.HTMLInputTypeAttribute;
@@ -10,9 +10,9 @@ interface InputProps extends  React.DetailedHTMLProps<React.InputHTMLAttributes<
 
 const Input: FC<InputProps> = (props) => {
     return (
-        <div className={inputStyle.wrapper}>
+        <div className={s.wrapper}>
             {props.title && <label>{props.title}</label>}
-            <input className={inputStyle.input}
+            <input className={s.input}
                 {...props}
             />
         </div>

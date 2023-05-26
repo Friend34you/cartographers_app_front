@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import Modal from "../common/Modal/Modal";
 import Button from "../common/Button/Button";
-import authStyle from "./Auth.module.css"
+import s from "./Auth.module.css"
 import RegistrationForm from "./RegistrationForm/RegistrationForm";
 import AuthorizationForm from "./AuthorizationForm/AuthorizationForm";
 import mainImg from "./../../static/Cartographers A Roll Player Tale.jpg"
@@ -18,16 +18,16 @@ const Auth: FC = () => {
     }
 
     return (
-        <div className={authStyle.container}>
-            <h1 className={authStyle.name}>
+        <div className={s.container}>
+            <h1 className={s.name}>
                 <p>Веб-игра</p>
-                <p className={authStyle.item2}>Картографы</p>
+                <p className={s.item2}>Картографы</p>
             </h1>
-            <nav className={authStyle.nav}>
+            <nav className={s.nav}>
                 <Button colorType={"accept"} onClick={handleOnClickRegistration}>Регистрация</Button>
                 <Button colorType={"accept"} onClick={handleOnClickAuthorization}>Вход</Button>
             </nav>
-            <div className={authStyle.img_wrapper}>
+            <div className={s.img_wrapper}>
                 {/*<img src={mainImg} alt=""/>*/}
             </div>
             <Modal active={registrationModal} setActive={setRegistrationModal}>

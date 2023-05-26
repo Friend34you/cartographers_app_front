@@ -1,9 +1,5 @@
 :root {
-    --element-height: 50vh
-}
-
-body {
-    background: #FAFAFA;
+    --element-height: 60vh
 }
 
 .room_container {
@@ -18,7 +14,7 @@ body {
 }
 
 .item {
-    min-height: 40px;
+    min-height: 100px;
     width: 30vw;
     background: #FFFFFF;
     border-radius: 14px;
@@ -32,7 +28,7 @@ body {
 }
 
 .item__invite_code {
-    height: 30vh;
+    height: 40vh;
 }
 
 .buttons_wrapper {

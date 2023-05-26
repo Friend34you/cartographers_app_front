@@ -1,18 +1,18 @@
 import React, {FC, useEffect, useState} from 'react';
 import Figure from "../../../models/Figure";
-import rotateLeftIcon from "./../../../static/rotate-left.png"
 import FigureCell from "../Field/Cell/FigureCell/FigureCell";
-import cardFigureStyle from "./FigureComponent.module.css"
+import s from "./FigureComponent.module.css"
+import rotateLeftIcon from "./../../../static/rotate-left.png"
+import invertV from "./../../../static/invertVertical2.png"
+import invertH from "./../../../static/invertHorizontal2.png"
 
 interface FigureProps {
     type: number;
+    shape: number[][]
 }
 
-const FigureComponent:FC<FigureProps> = ({type}) => {
-    const mas = [
-        [0, type, 0,],
-        [type, type, type],
-        [type, 0, type]]
+const FigureComponent: FC<FigureProps> = ({type, shape}) => {
+    const mas = fillTypeToFigure(shape, type);
     const [figure, setFigure] = useState(new Figure(mas))
     const dragCell = {
         x: 0,
@@ -23,32 +23,73 @@ const FigureComponent:FC<FigureProps> = ({type}) => {
     useEffect(() => {
         const newFigure = new Figure(mas)
         setFigure(newFigure)
-    },[type])
+    }, [type])
 
-    function updateFigure() {
-        const newFigure = new Figure(figure.cells);
-        newFigure.cells = rotateLeft(newFigure.cells);
+    function fillTypeToFigure(shape: number[][], type: number) {
+        const newShape = [...shape]
+        for (let i = 0; i < newShape.length; i++) {
+            for (let j = 0; j < newShape[0].length; j++) {
+                if (newShape[i][j] === 1) newShape[i][j] = type
+            }
+        }
+        return newShape;
+    }
+
+    // function testHandle(e: React.MouseEvent) {
+    //     const el = document.elementFromPoint(e.clientX, e.clientY);
+    //     console.log("CAPTURE", el)
+    // }
+
+    function updateFigure(mas: number[][]) {
+        const newFigure = new Figure(mas);
         setFigure(newFigure)
     }
 
-    function testHandle(e: React.MouseEvent) {
-        const el = document.elementFromPoint(e.clientX, e.clientY);
-        console.log("CAPTURE", el)
+    function rotateLeft(matrix: number[][]) {
+        return matrix[0].map((el: number, index: number) => matrix.map((row: number[]) => row[row.length - 1 - index]));
     }
 
-    function rotateLeft(matrix: any) {
-        return matrix[0].map((val: any, index: any) => matrix.map((row: any) => row[row.length - 1 - index]));
+    function inverseHorizontal(matrix: number[][]) {
+        const newMatrix = [...matrix];
+        return newMatrix.reverse();
+    }
+
+    function inverseVertical(matrix: number[][]) {
+
+        const newMatrix = [...matrix];
+        for (let i = 0; i < newMatrix.length; i++) {
+            console.log(i)
+            console.log(newMatrix[i])
+            newMatrix[i].reverse()
+        }
+        return newMatrix;
     }
 
     return (
-        <section>
-            <div style={{height: "30px", width: "30px", margin: "10px"}}
-                 onClick={() => {
-                     updateFigure()
-                 }}
-            >
-                <img draggable={"false"} src={rotateLeftIcon} style={{width: "inherit"}} alt=""/>
-            </div>
+        <div className={s.container}>
+            <section className={s.buttons}>
+                <div style={{height: "30px", width: "30px", margin: "5px"}}
+                     onClick={() => {
+                         updateFigure(rotateLeft(figure.cells))
+                     }}
+                >
+                    <img draggable={"false"} src={rotateLeftIcon} style={{width: "inherit"}} alt=""/>
+                </div>
+                <div style={{height: "30px", width: "30px", margin: "5px"}}
+                     onClick={() => {
+                         updateFigure(inverseHorizontal(figure.cells))
+                     }}
+                >
+                    <img draggable={"false"} src={invertH} style={{width: "inherit"}} alt=""/>
+                </div>
+                <div style={{height: "30px", width: "30px", margin: "5px"}}
+                     onClick={() => {
+                         updateFigure(inverseVertical(figure.cells))
+                     }}
+                >
+                    <img draggable={"false"} src={invertV} style={{width: "inherit"}} alt=""/>
+                </div>
+            </section>
             <div style={{width: "fit-content", height: "fit-content"}}
 
                  draggable={true}
@@ -57,12 +98,12 @@ const FigureComponent:FC<FigureProps> = ({type}) => {
                  }}
             >
                 {figure.cells.map((row, y) =>
-                    <div className={cardFigureStyle.row}>
+                    <div className={s.row}>
                         {row.map((el, x) =>
                             <FigureCell type={figure.cells[y][x]} x={x} y={y} dragCell={dragCell}/>)}
                     </div>)}
             </div>
-        </section>
+        </div>
     );
 };
 

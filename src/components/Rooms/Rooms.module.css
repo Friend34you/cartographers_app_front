@@ -1,7 +1,6 @@
 
 .rooms_container {
     height: 82vh;
-    background-color: #FAFAFA;
     display: flex;
     flex-wrap: wrap;
     justify-content: center ;

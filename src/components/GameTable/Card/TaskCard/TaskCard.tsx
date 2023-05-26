@@ -15,7 +15,7 @@ const TaskCard: FC<TaskCardProps> = ({taskImage, letter}) => {
             className={taskStyle.container}
         >
             <h2>{letter}</h2>
-            <Card/>
+            <Card cardImage={taskImage}/>
         </div>
     );
 };

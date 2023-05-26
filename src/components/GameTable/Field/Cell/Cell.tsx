@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import cellStyle from "./Cell.module.css"
+import s from "./Cell.module.css"
 
 
 interface CellProps {
@@ -12,17 +12,17 @@ const Cell: FC<CellProps> = ({type, onClick}) => {
     function getCellStyle(type: number) {
         switch (type) {
             case 0:
-                return cellStyle.empty
+                return s.empty
             case 1:
-                return cellStyle.forest
+                return s.forest
             case 2:
-                return cellStyle.village
+                return s.village
             case 3:
-                return cellStyle.river
+                return s.river
             case 4:
-                return cellStyle.field
+                return s.field
             case 5:
-                return cellStyle.mountain
+                return s.mountain
         }
     }
 
@@ -30,7 +30,7 @@ const Cell: FC<CellProps> = ({type, onClick}) => {
 
     return (
         <div
-            className={`${cellStyle.cell}  ${cellType}`}
+            className={`${s.cell}  ${cellType}`}
             onClick={() => {
                 onClick && onClick(type)
             }}

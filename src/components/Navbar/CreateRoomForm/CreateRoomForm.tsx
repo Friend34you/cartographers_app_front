@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import Button from "../../common/Button/Button";
-import createRoomStyle from "./CreateRoomForm.module.css"
+import s from "./CreateRoomForm.module.css"
 import Input from "../../common/Input/Input";
 import {roomAPI} from "../../../services/RoomService";
 
@@ -32,13 +32,13 @@ const CreateRoomForm: FC<CreateRoomProps> = ({setModal}) => {
     }
 
     return (
-        <div className={createRoomStyle.container}>
+        <div className={s.container}>
             <h1>Создание комнаты</h1>
-            <section className={createRoomStyle.inputs_wrapper}>
+            <section className={s.inputs_wrapper}>
                 <Input value={title} onChange={handleTitle} type={"search"} title={"Название:"}/>
                 Число игроков:
                 <select
-                    className={createRoomStyle.select}
+                    className={s.select}
                     value={selectValue}
                     onChange={handleSelectChange}
                 >
@@ -51,7 +51,7 @@ const CreateRoomForm: FC<CreateRoomProps> = ({setModal}) => {
                 </select>
                 <Input type={"password"} title={"Пароль (опционально)"}/>
             </section>
-            <section className={createRoomStyle.buttons_wrapper}>
+            <section className={s.buttons_wrapper}>
                 <Button colorType={"deny"} onClick={handleDeny}>Отмена</Button>
                 <Button colorType={"accept"} onClick={handleAccept}>Создать</Button>
             </section>

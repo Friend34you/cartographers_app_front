@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from 'react';
-import modalStyle from "./Modal.module.css"
+import s from "./Modal.module.css"
 import close from "./../../../static/close2.png"
 
 interface ModalProps {
@@ -9,7 +9,7 @@ interface ModalProps {
 }
 
 const Modal: FC<ModalProps> = ({active, setActive, children}) => {
-    const modalActive = `${modalStyle.modal} ${modalStyle.active}`;
+    const modalActive = `${s.modal} ${s.active}`;
     const closeModal = () => setActive(false);
     const contentClick = (e: React.MouseEvent<HTMLElement>) => e.stopPropagation();
 
@@ -29,11 +29,11 @@ const Modal: FC<ModalProps> = ({active, setActive, children}) => {
 
     return (
         <div
-            className={active ? modalActive : modalStyle.modal}
+            className={active ? modalActive : s.modal}
         >
-            <div className={modalStyle.modal__content} onClick={contentClick}>
+            <div className={s.modal__content} onClick={contentClick}>
                 <img
-                    className={modalStyle.close}
+                    className={s.close}
                     src={close}
                     alt=""
                     onClick={closeModal}

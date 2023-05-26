@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import cardStyle from "./Card.module.css";
+import s from "./Card.module.css";
 import Modal from "../../common/Modal/Modal";
 import defaultCard from "./../../../static/mainImg.png"
 interface CardProps {
@@ -13,12 +13,12 @@ const Card:FC<CardProps> = ({cardImage = defaultCard }) => {
     return (
         <>
             <div
-                className={cardStyle.card}
+                className={s.card}
                 style={{backgroundImage: `url(${cardImage})`}}
                 onClick={() => setCardModal(true)}
             />
             <Modal active={cardModal} setActive={setCardModal}>
-                <img className={cardStyle.img} src={cardImage} alt=""/>
+                <img className={s.img} src={cardImage} alt=""/>
             </Modal>
         </>
     );

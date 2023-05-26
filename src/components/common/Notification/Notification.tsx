@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import notificationStyle from "./Notification.module.css"
+import s from "./Notification.module.css"
 
 interface NotificationProps {
     active: boolean;
@@ -10,8 +10,8 @@ const Notification: FC<NotificationProps> = ({active}) => {
     return (
         <div
             className={active
-                ? `${notificationStyle.notification} ${notificationStyle.active}`
-                : notificationStyle.notification}
+                ? `${s.notification} ${s.active}`
+                : s.notification}
         >
             Успешно выполнено
         </div>

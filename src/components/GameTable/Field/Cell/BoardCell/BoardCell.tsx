@@ -2,8 +2,7 @@ import React, {FC} from 'react';
 import Cell from "../Cell";
 import Board from "../../../../../models/Board";
 import {setFigureOnField} from "../../../../../gameLogic/setFigureOnField";
-import boardCellStyle from "./BoardCell.module.css";
-import pencilSound from "./../../../../../static/sounds/pencil_draw.mp3"
+import s from "./BoardCell.module.css";
 interface BoardCellProps {
     x: number;
     y: number;
@@ -33,7 +32,7 @@ const BoardCell:FC<BoardCellProps> = ({y, x, type, field, updateBoard}) => {
                 updateBoard!()
             }}
 
-            className={boardCellStyle.cell}
+            className={s.cell}
         >
             <Cell type={type}/>
         </div>

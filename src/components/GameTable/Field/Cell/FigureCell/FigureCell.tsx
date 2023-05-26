@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import Cell from "../Cell";
-import figureCellStyle from "./FigureCell.module.css";
+import s from "./FigureCell.module.css";
 
 interface FigureCellProps {
     x: number;
@@ -27,8 +27,8 @@ const FigureCell:FC<FigureCellProps> = ({dragCell, y, x, type}) => {
         <div
             onMouseDown={getCellCoordinates}
             className={type !== 0
-                ? `${figureCellStyle.cell} ${figureCellStyle.filled}`
-                : figureCellStyle.cell}
+                ? `${s.cell} ${s.filled}`
+                : s.cell}
         >
             <Cell type={type}/>
         </div>

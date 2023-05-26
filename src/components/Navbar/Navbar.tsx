@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import navbarStyle from "./Navbar.module.css"
+import s from "./Navbar.module.css"
 import Button from "../common/Button/Button";
 import useDebounce from "../../hooks/useDebounce";
 import {roomAPI} from "../../services/RoomService";
@@ -25,8 +25,8 @@ const Navbar = () => {
     }
     return (
         <>
-            <div className={navbarStyle.navbar}>
-                <section className={navbarStyle.actions}>
+            <div className={s.navbar}>
+                <section className={s.actions}>
                     <Button
                         colorType={"accept"}
                         onClick={() => setCreateRoomModal(true)}
@@ -40,21 +40,21 @@ const Navbar = () => {
                         Войти по Коду
                     </Button>
                 </section>
-                <section className={navbarStyle.input_wrapper}>
+                <section className={s.input_wrapper}>
                     <Input placeholder={"Введите название / id комнаты..."}
                            value={searchValue}
                            onChange={handleInputChange}
                            type="search"
                     />
                 </section>
-                <section className={navbarStyle.user_wrapper} onClick={() => setUserOptionsVisibility(prev => !prev)}>
+                <section className={s.user_wrapper} onClick={() => setUserOptionsVisibility(prev => !prev)}>
                     <span>юзернейм</span>
                     <UserIcon/>
                 </section>
             </div>
             <div className={userOptionsVisibility
-                ? `${navbarStyle.user_options} ${navbarStyle.active}`
-                : navbarStyle.user_options}
+                ? `${s.user_options} ${s.active}`
+                : s.user_options}
             >
                 <Button colorType={"deny"}>Выйти</Button>
             </div>

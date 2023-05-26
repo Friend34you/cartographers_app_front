@@ -1,9 +1,8 @@
 import React, {useRef, useState} from 'react';
 import {roomAPI} from "../../services/RoomService";
 import RoomItem from "./RoomItem/RoomItem";
-import Modal from "../common/Modal/Modal";
 import Navbar from "../Navbar/Navbar";
-import navbarStyle from "./Rooms.module.css"
+import s from "./Rooms.module.css"
 import useScroll from "../../hooks/useScroll";
 
 const Rooms: React.FC = () => {
@@ -20,7 +19,7 @@ const Rooms: React.FC = () => {
     return (
         <>
             <Navbar/>
-            <div ref={parentRef} className={navbarStyle.rooms_container}>
+            <div ref={parentRef} className={s.rooms_container}>
                 {rooms && rooms.map(room =>
                     <RoomItem
                         key={room.room_id}

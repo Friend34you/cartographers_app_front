@@ -1,5 +1,5 @@
 import React, {FC, MouseEventHandler, ReactNode} from 'react';
-import buttonStyle from "./Button.module.css";
+import s from "./Button.module.css";
 
 interface ButtonProps {
     colorType: "deny" | "accept";
@@ -9,10 +9,10 @@ interface ButtonProps {
 }
 
 const Button: FC<ButtonProps> = ({colorType, children, onClick, type}) => {
-    const color = colorType === "accept" ? buttonStyle.accept : buttonStyle.deny
+    const color = colorType === "accept" ? s.accept : s.deny
     return (
         <button
-            className={`${buttonStyle.button} ${color}`}
+            className={`${s.button} ${color}`}
             onClick={onClick}
             type={type}
         >

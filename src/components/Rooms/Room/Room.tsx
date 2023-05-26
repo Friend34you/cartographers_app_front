@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react';
 import Button from "../../common/Button/Button";
 import {Link} from "react-router-dom";
 import {ALL_ROOMS_ROUTE, GAME_ROUTE} from "../../../utils/consts";
-import roomStyle from "./Room.module.css"
+import s from "./Room.module.css"
 import UserIcon from "../../common/UserIcon/UserIcon";
 import copyImg from "../../../static/copy.png"
 import Notification from "../../common/Notification/Notification";
@@ -19,41 +19,69 @@ const Room: FC = () => {
     }
 
     return (
-        <div className={roomStyle.room_container}>
-            <h1>Room: Zhopa</h1>
-            <div className={roomStyle.main_content_wrapper}>
+        <div className={s.room_container}>
+            <h1>Room: room1</h1>
+            <div className={s.main_content_wrapper}>
                 <section>
                     <h2>Участники</h2>
-                    <div className={`${roomStyle.item} ${roomStyle.item__users}`}>
-                        <div className={roomStyle.user}>
+                    <div className={`${s.item} ${s.item__users}`}>
+                        <div className={s.user}>
                             <UserIcon/>
-                            Вовчик
-                            <img src={kickUser} alt="кикнуть"
-                                 className={roomStyle.kick_user}/>
+                            Vladimir
+                            {/*<img src={kickUser} alt="кикнуть"*/}
+                            {/*     className={roomStyle.kick_user}/>*/}
                         </div>
-                        <div className={roomStyle.user}>овчик</div>
-                        <div className={roomStyle.user}>овчик</div>
-                        <div className={roomStyle.user}>овчик</div>
-                        <div className={roomStyle.user}>овчик</div>
-                        <div className={roomStyle.user}>овчик</div>
-                        <div className={roomStyle.user}>овчик</div>
-                        <div className={roomStyle.user}>овчик</div>
+
+                        <div className={s.user}>
+                            <UserIcon/>
+                            Vladimir
+                            <img src={kickUser} alt="кикнуть"
+                                 className={s.kick_user}/>
+                        </div>
+
+                        <div className={s.user}>
+                            <UserIcon/>
+                            Vladimir
+                            <img src={kickUser} alt="кикнуть"
+                                 className={s.kick_user}/>
+                        </div>
+
+                        <div className={s.user}>
+                            <UserIcon/>
+                            Vladimir
+                            <img src={kickUser} alt="кикнуть"
+                                 className={s.kick_user}/>
+                        </div>
+
+                        <div className={s.user}>
+                            <UserIcon/>
+                            Vladimir
+                            <img src={kickUser} alt="кикнуть"
+                                 className={s.kick_user}/>
+                        </div>
+
+                        <div className={s.user}>
+                            <UserIcon/>
+                            Vladimir
+                            <img src={kickUser} alt="кикнуть"
+                                 className={s.kick_user}/>
+                        </div>
                     </div>
                 </section>
                 <section>
                     <h2>Пригласить друга</h2>
-                    <div className={`${roomStyle.item} ${roomStyle.item__invite_code}`}>
+                    <div className={`${s.item} ${s.item__invite_code}`}>
                         <h2>Код приглашения</h2>
-                        <div className={roomStyle.invite_code}>
+                        <div className={s.invite_code}>
                             {inviteCode}
                             <img
                                 src={copyImg}
-                                className={roomStyle.copy_img}
+                                className={s.copy_img}
                                 onClick={handlerOnClick}
                             />
                         </div>
                     </div>
-                    <div className={roomStyle.buttons_wrapper}>
+                    <div className={s.buttons_wrapper}>
                         <Link to={ALL_ROOMS_ROUTE}>
                             <Button colorType={"deny"}>
                                 Покинуть комнату

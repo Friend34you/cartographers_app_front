@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import Cell from "./Cell/Cell";
-import fieldStyle from "./BoardComponent.module.css"
+import s from "./BoardComponent.module.css"
 import Board from "../../../models/Board";
 import BoardCell from "./Cell/BoardCell/BoardCell";
 
@@ -11,7 +11,7 @@ interface FieldProps {
 
 const BoardComponent:FC<FieldProps> = ({board, updateBoard}) => {
     return (
-        <div className={fieldStyle.field}>
+        <div className={s.field}>
             {board.cells.map((row: any, y: any) =>
                 <React.Fragment>
                     {row.map((el: any, x: any) =>

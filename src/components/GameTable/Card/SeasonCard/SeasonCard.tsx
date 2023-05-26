@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import seasonStyle from "./SeasonCard.module.css"
+import s from "./SeasonCard.module.css"
 import Card from "../Card";
 
 interface SeasonCardProps {
@@ -11,9 +11,9 @@ const SeasonCard: FC<SeasonCardProps> = ({seasonImage}) => {
 
     return (
         <div
-            className={seasonStyle.container}
+            className={s.container}
         >
-            <Card/>
+            <Card cardImage={seasonImage}/>
         </div>
     );
 };

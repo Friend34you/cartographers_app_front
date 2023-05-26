@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import registrationStyle from "./RegistrationForm.module.css";
+import s from "./RegistrationForm.module.css";
 import Button from "../../common/Button/Button";
 import {useForm} from "react-hook-form";
 import view from "./../../../static/view.png"
@@ -28,16 +28,16 @@ const RegistrationForm: FC = () => {
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)} className=
-                {registrationStyle.form}>
+                {s.form}>
                 <h1>Регистрация</h1>
-                <span className={registrationStyle.message_wrapper}>
+                <span className={s.message_wrapper}>
                     <label>Логин:</label>
                     {errors?.username &&
-                        <p className={registrationStyle.error}>
+                        <p className={s.error}>
                             {errors?.username?.message as string}
                         </p>}
                 </span>
-                <input className={registrationStyle.input} type="text" placeholder="Login" {...register("username", {
+                <input className={s.input} type="text" placeholder="Login" {...register("username", {
                     required: "Поле обязательно к заполнению",
                     minLength: {
                         value: 5,
@@ -54,15 +54,15 @@ const RegistrationForm: FC = () => {
                 })} />
 
 
-                <span className={registrationStyle.message_wrapper}>
+                <span className={s.message_wrapper}>
                     <label>Пароль:</label>
                     {errors?.password &&
-                        <p className={registrationStyle.error}>
+                        <p className={s.error}>
                             {errors?.password?.message as string}
                         </p>}
                 </span>
-                <div className={registrationStyle.input_wrapper}>
-                    <input className={registrationStyle.input}
+                <div className={s.input_wrapper}>
+                    <input className={s.input}
                            type={passwordShown ? "text" : "password"}
                            placeholder="Password" {...register("password", {
                         required: "Поле обязательно к заполнению",
@@ -76,21 +76,21 @@ const RegistrationForm: FC = () => {
                         },
                     })} />
                     <img
-                        className={registrationStyle.image}
+                        className={s.image}
                         src={eye} alt={"eye"}
                         onClick={togglePasswordVisibility}
                     />
                 </div>
 
 
-                <span className={registrationStyle.message_wrapper}>
+                <span className={s.message_wrapper}>
                     <label>Подтвердите пароль:</label>
                     {errors?.confirm_password &&
-                        <p className={registrationStyle.error}>
+                        <p className={s.error}>
                             {errors?.confirm_password?.message as string}
                         </p>}
                 </span>
-                <input className={registrationStyle.input}
+                <input className={s.input}
                        type="password"
                        placeholder="Confirm password" {...register("confirm_password", {
                     required: "Поле обязательно к заполнению",
@@ -101,7 +101,7 @@ const RegistrationForm: FC = () => {
                     },
                 })} />
 
-                <div className={registrationStyle.buttons_wrapper}>
+                <div className={s.buttons_wrapper}>
                     <Button type={"submit"} colorType={"deny"} onClick={clearFields}>Очистить</Button>
                     <Button type={"submit"} colorType={"accept"}>Зарегистрироваться</Button>
                 </div>
