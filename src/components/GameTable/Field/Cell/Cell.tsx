@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import s from "./Cell.module.css"
+import {CellTypes} from "../../../../utils/cellTypes";
 
 
 interface CellProps {
@@ -11,18 +12,22 @@ const Cell: FC<CellProps> = ({type, onClick}) => {
 
     function getCellStyle(type: number) {
         switch (type) {
-            case 0:
+            case CellTypes.EMPTY:
                 return s.empty
-            case 1:
+            case CellTypes.FOREST:
                 return s.forest
-            case 2:
+            case CellTypes.VILLAGE:
                 return s.village
-            case 3:
+            case CellTypes.RIVER:
                 return s.river
-            case 4:
+            case CellTypes.FIELD:
                 return s.field
-            case 5:
+            case CellTypes.MONSTER:
+                return s.monster
+            case CellTypes.MOUNTAIN:
                 return s.mountain
+            case CellTypes.RUINS:
+                return s.ruins
         }
     }
 

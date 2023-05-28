@@ -1,5 +1,4 @@
 import React, {FC, useState} from 'react';
-import Cell from "./Cell/Cell";
 import s from "./BoardComponent.module.css"
 import Board from "../../../models/Board";
 import BoardCell from "./Cell/BoardCell/BoardCell";

@@ -1,6 +1,10 @@
 export enum CellTypes {
     EMPTY,
-    SOME_TYPE,
-
-    MOUNTAIN
+    FOREST,
+    VILLAGE,
+    RIVER,
+    FIELD,
+    MONSTER,
+    MOUNTAIN,
+    RUINS
 }

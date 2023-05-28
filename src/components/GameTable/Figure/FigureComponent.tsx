@@ -8,7 +8,7 @@ import invertH from "./../../../static/invertHorizontal2.png"
 
 interface FigureProps {
     type: number;
-    shape: number[][]
+    shape: number[][];
 }
 
 const FigureComponent: FC<FigureProps> = ({type, shape}) => {
@@ -21,15 +21,20 @@ const FigureComponent: FC<FigureProps> = ({type, shape}) => {
     }
 
     useEffect(() => {
-        const newFigure = new Figure(mas)
-        setFigure(newFigure)
+        updateFigure(mas)
+        console.log(mas)
     }, [type])
+
+    function updateFigure(mas: number[][]) {
+        const newFigure = new Figure(mas);
+        setFigure(newFigure)
+    }
 
     function fillTypeToFigure(shape: number[][], type: number) {
         const newShape = [...shape]
         for (let i = 0; i < newShape.length; i++) {
             for (let j = 0; j < newShape[0].length; j++) {
-                if (newShape[i][j] === 1) newShape[i][j] = type
+                if (newShape[i][j] !== 0) newShape[i][j] = type
             }
         }
         return newShape;
@@ -39,11 +44,6 @@ const FigureComponent: FC<FigureProps> = ({type, shape}) => {
     //     const el = document.elementFromPoint(e.clientX, e.clientY);
     //     console.log("CAPTURE", el)
     // }
-
-    function updateFigure(mas: number[][]) {
-        const newFigure = new Figure(mas);
-        setFigure(newFigure)
-    }
 
     function rotateLeft(matrix: number[][]) {
         return matrix[0].map((el: number, index: number) => matrix.map((row: number[]) => row[row.length - 1 - index]));

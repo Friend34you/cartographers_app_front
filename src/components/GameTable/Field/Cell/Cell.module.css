@@ -47,6 +47,14 @@
 
 }
 
+.ruins {
+    background: grey;
+    background-image: url("/src/static/environmentTypes/ruins.PNG");
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .field, .forest, .monster, .mountain, .river, .village {
     background-repeat: no-repeat;
     background-size: cover;

@@ -34,8 +34,8 @@ const ResearchCard: FC<ResearchCardProps> = ({
                     {environment2 && <Cell type={environment2} onClick={setFigureEnvType}/>}
                 </div>
                 <div className={s.figures_wrapper}>
-                    {figureShape1 && <FigureComponent type={figureEnvType} shape={[[1,1,1],[1,0,0]]}/>}
-                    {/*{figureShape1 && <FigureComponent type={figureEnvType} shape={[[1,0,0],[0,1,0],[0,0,1]]}/>}*/}
+                    {figureShape1 && <FigureComponent type={figureEnvType} shape={figureShape1}/>}
+                    {figureShape2 && <FigureComponent type={figureEnvType} shape={figureShape2}/>}
                 </div>
             </section>
             <div className={s.card_wrapper}>
