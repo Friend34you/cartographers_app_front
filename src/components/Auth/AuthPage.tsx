@@ -1,11 +1,11 @@
 import React, {FC, useState} from 'react';
 import Modal from "../common/Modal/Modal";
 import Button from "../common/Button/Button";
-import s from "./Auth.module.css"
+import s from "./AuthPage.module.css"
 import RegistrationForm from "./RegistrationForm/RegistrationForm";
 import AuthorizationForm from "./AuthorizationForm/AuthorizationForm";
 import mainImg from "./../../static/Cartographers A Roll Player Tale.jpg"
-const Auth: FC = () => {
+const AuthPage: FC = () => {
     const [registrationModal, setRegistrationModal] = useState(false);
     const [authorizationModal, setAuthorizationModal] = useState(false);
 
@@ -40,4 +40,4 @@ const Auth: FC = () => {
     );
 };
 
-export default Auth;
+export default AuthPage;

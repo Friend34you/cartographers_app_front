@@ -20,12 +20,14 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
         ? handleOnClickModal
         : handleOnClickRoom
 
+
     return (
         <>
             <div className={s.item}>
-                <h2>{room.room_name}</h2>
+                <h2>{room.name}</h2>
                 <p>{room.current_users} / {room.max_users}</p>
                 <p>С паролем: {room.contains_password ? "Да" : "нет"}</p>
+                <div>Игра стартовала? {room.is_game_started}</div>
                 <div className={s.button_container}>
                     {
                         room.contains_password
@@ -34,7 +36,7 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
                                 onClick={onClick}>
                                 Войти
                             </Button>
-                            : <Link to={ROOM_ROUTE + room.room_id}>
+                            : <Link to={ROOM_ROUTE}>
                                 <Button
                                     colorType={"accept"}
                                     onClick={onClick}>
@@ -46,11 +48,11 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
                 </div>
             </div>
             <Modal active={modalActive} setActive={setModalActive}>
-                <h1>{room.room_name}</h1>
+                <h1>{room.name}</h1>
                 <p>{room.current_users} / {room.max_users}</p>
                 <Input type={"password"} title={"Пароль:"} placeholder={"Введите пароль..."}/>
 
-                <Link to={ROOM_ROUTE + room.room_id}>
+                <Link to={ROOM_ROUTE}>
                     <Button
                         colorType={"accept"}>
                         Войти

@@ -72,5 +72,27 @@
       "contains_password": false,
       "is_game_started": true
     }
-  ]
+  ],
+  "game":{
+    "room_name": "Winnerss",
+    "field": [],
+    "seasons": {
+      "spring": "1",
+      "summer": "2",
+      "autumn": "3",
+      "winter": "4"
+    },
+    "current_season": "spring",
+    "player_scores": [
+      1,2,3,4
+    ],
+    "card": {
+      "picture": "url",
+      "figure": [[1,0,0],[0,1,0],[0,1,1]],
+      "other_figure": [[1,0,1],[0,1,0]]
+    },
+    "onRuins": false,
+    "coins": 10,
+    "score": 10
+  }
 }

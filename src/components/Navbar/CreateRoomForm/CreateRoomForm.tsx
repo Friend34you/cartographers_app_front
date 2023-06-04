@@ -3,6 +3,9 @@ import Button from "../../common/Button/Button";
 import s from "./CreateRoomForm.module.css"
 import Input from "../../common/Input/Input";
 import {roomAPI} from "../../../services/RoomService";
+import {Navigate} from "react-router-dom";
+import {ROOM_ROUTE} from "../../../utils/consts";
+import {ifError} from "assert";
 
 interface CreateRoomProps {
     setModal: Function;
@@ -10,12 +13,17 @@ interface CreateRoomProps {
 
 const CreateRoomForm: FC<CreateRoomProps> = ({setModal}) => {
     const [title, setTitle] = useState("")
-    const [createRoom, {data}] = roomAPI.useCreateRoomMutation()
-    const [selectValue, setSelectValue] = useState("2")
+    const [password, setPassword] = useState("")
+    const [selectValue, setSelectValue] = useState("2");
+    const [createRoom, {isSuccess, isLoading, isError}] = roomAPI.useCreateRoomMutation()
+    const maxUsersInRoom = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
     async function handleAccept() {
-        console.log(title)
-        console.log(selectValue)
-        // await createRoom({name: title, max_users: 2})
+        await createRoom({
+            name: title,
+            max_users: selectValue,
+            password: String(password.trim()) !== "" ? String(password.trim()) : null
+        });
     }
 
     async function handleDeny() {
@@ -25,6 +33,10 @@ const CreateRoomForm: FC<CreateRoomProps> = ({setModal}) => {
 
     function handleTitle(e: React.ChangeEvent<HTMLInputElement>) {
         setTitle(e.target.value)
+    }
+
+    function handlePassword(e: React.ChangeEvent<HTMLInputElement>) {
+        setPassword(e.target.value)
     }
 
     function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -42,14 +54,13 @@ const CreateRoomForm: FC<CreateRoomProps> = ({setModal}) => {
                     value={selectValue}
                     onChange={handleSelectChange}
                 >
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
-                    <option value={5}>5</option>
-                    <option value={6}>6</option>
-                    <option value={7}>7</option>
+                    {maxUsersInRoom.map(value =>
+                        <option key={value} value={value}>{value}</option>)}
                 </select>
-                <Input type={"password"} title={"Пароль (опционально)"}/>
+                <Input value={password} onChange={handlePassword} type={"password"} title={"Пароль (опционально)"}/>
+                {isLoading && <div>Загрузка...</div>}
+                {isError && <div>Произошла ошибка</div>}
+                {isSuccess && <Navigate to={ROOM_ROUTE}/>}
             </section>
             <section className={s.buttons_wrapper}>
                 <Button colorType={"deny"} onClick={handleDeny}>Отмена</Button>

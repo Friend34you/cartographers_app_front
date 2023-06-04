@@ -4,19 +4,25 @@ import Button from "../../common/Button/Button";
 import {useForm} from "react-hook-form";
 import view from "./../../../static/view.png"
 import hide from "./../../../static/hide.png"
+import {authAPI} from "../../../services/AuthService";
+import {FetchBaseQueryError} from "@reduxjs/toolkit/query";
 
 const AuthorizationForm = () => {
+    const [authorize, {data: token, isLoading, isError, isSuccess, error}] = authAPI.useAuthorizationMutation()
     const {register, handleSubmit, reset, formState: {errors}} = useForm({
         mode: "onBlur",
 
     });
     const [passwordShown, setPasswordShown] = useState(false);
-        const eye = passwordShown
+    const eye = passwordShown
         ? hide
         : view
-    const onSubmit = (data: object) => {
-        console.log(data);
-        reset();
+    const onSubmit = async (data: object) => {
+        const response = await authorize(data)
+        if (response) {
+            console.log(response);
+            reset()
+        }
     }
 
     function clearFields() {
@@ -27,6 +33,9 @@ const AuthorizationForm = () => {
         setPasswordShown(prev => !prev)
     }
 
+    if (isSuccess) {
+        localStorage.setItem("token" ,token?.auth_token!)
+    }
 
     return (
         <div>
@@ -64,8 +73,11 @@ const AuthorizationForm = () => {
                         onClick={togglePasswordVisibility}
                     />
                 </div>
-
-
+                {isLoading && <div>Загрузка...</div>}
+                {isError &&
+                    <p className={s.error}>
+                        Неверные данные
+                    </p>}
                 <div className={s.buttons_wrapper}>
                     <Button type={"submit"} colorType={"deny"} onClick={clearFields}>Очистить</Button>
                     <Button type={"submit"} colorType={"accept"}>Войти</Button>

@@ -8,6 +8,9 @@ import UserIcon from "../common/UserIcon/UserIcon";
 import CreateRoomForm from "./CreateRoomForm/CreateRoomForm";
 import Input from "../common/Input/Input";
 import InviteCodeEnterForm from "./InviteCodeEnterForm/InviteCodeEnterForm";
+import {userAPI} from "../../services/UserService";
+import {redirect} from "react-router-dom";
+import {AUTH_ROUTE} from "../../utils/consts";
 
 const Navbar = () => {
     const [codeEnterModal, setCodeEnterModal] = useState(false);
@@ -15,6 +18,7 @@ const Navbar = () => {
     const [userOptionsVisibility, setUserOptionsVisibility] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [findRoom, {data}] = roomAPI.useFindRoomMutation()
+    const {data: user, isSuccess} = userAPI.useFetchUserDataQuery("", {})
     const debouncedCallback = useDebounce((value: string) => {
         return findRoom(value)
     }, 1000)
@@ -23,6 +27,14 @@ const Navbar = () => {
         setSearchValue(e.target.value);
         debouncedCallback(e.target.value)
     }
+
+    const handleLogout = () => {
+        localStorage.removeItem("token")
+        redirect(AUTH_ROUTE)
+    }
+
+    if (isSuccess) console.log(user)
+
     return (
         <>
             <div className={s.navbar}>
@@ -48,7 +60,7 @@ const Navbar = () => {
                     />
                 </section>
                 <section className={s.user_wrapper} onClick={() => setUserOptionsVisibility(prev => !prev)}>
-                    <span>юзернейм</span>
+                    {user && <span>{user.username}</span>}
                     <UserIcon/>
                 </section>
             </div>
@@ -56,7 +68,7 @@ const Navbar = () => {
                 ? `${s.user_options} ${s.active}`
                 : s.user_options}
             >
-                <Button colorType={"deny"}>Выйти</Button>
+                <Button colorType={"deny"} onClick={handleLogout}>Выйти</Button>
             </div>
             <Modal active={codeEnterModal} setActive={setCodeEnterModal}>
                 <InviteCodeEnterForm/>

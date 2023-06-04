@@ -10,25 +10,30 @@ const Rooms: React.FC = () => {
     const childRef = useRef<HTMLInputElement>(null);
 
     const [page, setPage] = useState(1)
-    const {data: rooms, isLoading} = roomAPI.useFetchAllRoomsQuery("", {
+    const {data: rooms, isLoading, isError, isSuccess} = roomAPI.useFetchAllRoomsQuery("", {
         pollingInterval: 10000,
+        refetchOnMountOrArgChange: true
     })
-    useScroll(parentRef, childRef, () => {
-        setPage(prev => prev + 1)
-    })
+    // useScroll(parentRef, childRef, () => {
+    //     setPage(prev => prev + 1)
+    // })
+
+    if (isSuccess) console.log(rooms)
     return (
-        <>
-            <Navbar/>
+        <div>
             <div ref={parentRef} className={s.rooms_container}>
+                {isLoading && <div className={s.loading}>Загрузка...</div>}
+                {isError && <div className={s.error}>ОШИБКА</div>}
                 {rooms && rooms.map(room =>
                     <RoomItem
-                        key={room.room_id}
+                        key={room.id}
                         room={room}
                     />
-                )}
-                <div ref={childRef} style={{width: '100vw', height: "20px", backgroundColor: "green"}}></div>
+                )
+                }
+                {/*<div ref={childRef} style={{width: '100vw', height: "20px", backgroundColor: "green"}}></div>*/}
             </div>
-        </>
+        </div>
     );
 };
 

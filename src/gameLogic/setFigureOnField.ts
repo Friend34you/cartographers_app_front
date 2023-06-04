@@ -7,7 +7,7 @@ export function setFigureOnField(figure: number[][],
                                  field: number[][],
                                  fieldCellX: number,
                                  fieldCellY: number,
-                                 onRuins: boolean = true): number[][] {
+                                 onRuins: boolean = false): number[][] {
 
     const newField = [...field]
     //Координаты "начала массива фигуры",т.е если взялись за послежнюю клетку фигуры,

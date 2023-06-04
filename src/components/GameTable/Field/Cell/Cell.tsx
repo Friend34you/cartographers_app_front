@@ -35,6 +35,7 @@ const Cell: FC<CellProps> = ({type, onClick}) => {
 
     return (
         <div
+            draggable={false}
             className={`${s.cell}  ${cellType}`}
             onClick={() => {
                 onClick && onClick(type)

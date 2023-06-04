@@ -20,108 +20,99 @@ import task3 from "./../../static/для отчёта/img_2.png"
 import task4 from "./../../static/для отчёта/img_3.png"
 import expl from "./../../static/для отчёта/explorationCard.png"
 import season from "./../../static/для отчёта/season.png"
-import {CellTypes} from "../../utils/cellTypes";
+import {gameAPI} from "../../services/GameService";
+import {mockBoard} from "../../gameLogic/mockBoard";
 
 
 const GameTable: FC = () => {
-    const [board, setBoard] = useState(new Board())
-    let coins = 0;
-    const previousTurnBoardMock = [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, CellTypes.MOUNTAIN, 0, CellTypes.RUINS, 0, 0, 0, 0, 0],
-        [0, CellTypes.RUINS, 0, 0, 0, 0, 0, 0, CellTypes.MOUNTAIN, CellTypes.RUINS, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, CellTypes.MOUNTAIN, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, CellTypes.RUINS, CellTypes.MOUNTAIN, 0, 0, 0, 0, 0, 0, CellTypes.RUINS, 0],
-        [0, 0, 0, 0, 0, CellTypes.RUINS, 0, CellTypes.MOUNTAIN, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ]
+        const {data: gameData, isLoading, isError, isSuccess} = gameAPI.useGetGameTurnQuery("", {})
+        const [board, setBoard] = useState(new Board())
+        const [figureAvailable, setFigureAvailable] = useState(true)
+        const previousTurnBoardMock = JSON.parse(JSON.stringify(mockBoard))
+        useEffect(() => {
+            restart();
+        }, [])
 
-    useEffect(() => {
-        restart();
-    }, [])
+        function restart() {
+            const newBoard = new Board();
+            newBoard.initCells();
+            setBoard(newBoard)
+        }
 
-    function restart() {
-        const newBoard = new Board();
-        newBoard.initCells();
-        newBoard.cells[1][3] = CellTypes.MOUNTAIN;
-        newBoard.cells[2][8] = CellTypes.MOUNTAIN;
-        newBoard.cells[5][5] = CellTypes.MOUNTAIN;
-        newBoard.cells[8][2] = CellTypes.MOUNTAIN;
-        newBoard.cells[8][1] = CellTypes.RUINS;
-        newBoard.cells[1][5] = CellTypes.RUINS;
-        newBoard.cells[2][1] = CellTypes.RUINS;
-        newBoard.cells[2][9] = CellTypes.RUINS;
-        newBoard.cells[8][9] = CellTypes.RUINS;
-        newBoard.cells[9][5] = CellTypes.RUINS;
-        newBoard.cells[9][7] = CellTypes.MOUNTAIN;
-        setBoard(newBoard)
-    }
+        function updateBoard() {
+            const newBoard = new Board();
+            newBoard.cells = board.cells;
+            setBoard(newBoard);
+            setFigureAvailable(false)
+        }
 
-    function updateBoard() {
-        const newBoard = new Board();
-        newBoard.cells = board.cells;
-        setBoard(newBoard)
-    }
+        function denyBoardChanges() {
+            const newBoard = new Board();
+            newBoard.cells = previousTurnBoardMock;
+            console.log(previousTurnBoardMock)
+            setBoard(newBoard);
+            setFigureAvailable(true);
+        }
 
-    function denyBoardChanges() {
-        const newBoard = new Board();
-        newBoard.cells = previousTurnBoardMock;
-        setBoard(newBoard)
-    }
+        function endTurn() {
+            //code here...
+        }
 
-    function endTurn() {
-        //code here...
-    }
-
-    return (
-        <div className={s.container}>
-            <section className={s.field_wrapper}>
-                <h1>Название игры</h1>
-                <BoardComponent board={board} updateBoard={updateBoard}/>
-                <img src={fieldImg} alt="" className={s.field_img}/>
-            </section>
-            <section className={s.interactions_wrapper}>
-                <div className={s.season}>
-                    <div className={s.tasks}>
-                        <TaskCard letter={"A"} taskImage={task1}/>
-                        <TaskCard letter={"B"} taskImage={task2}/>
-                        <TaskCard letter={"C"} taskImage={task3}/>
-                        <TaskCard letter={"D"} taskImage={task4}/>
-                    </div>
-                    <SeasonCard seasonImage={season}/>
-                    <section className={s.buttons_wrapper}>
-                        <Link to={ALL_ROOMS_ROUTE}>
-                            <Button colorType={"deny"} type={"button"}>
-                                Выйти
-                            </Button>
-                        </Link>
-                        <Player url={backgroundSound}/>
-                        <img className={s.playersIcon} src={playersIcon} alt="игроки"/>
+        return (<>
+            {isLoading && <div>Loading...</div>}
+            {isError && <div>Error</div>}
+            {gameData &&
+                <div className={s.container}>
+                    <section className={s.field_wrapper}>
+                        <h1>{gameData.room_name}</h1>
+                        <BoardComponent board={board} updateBoard={updateBoard}/>
+                        <img src={fieldImg} alt="" className={s.field_img}/>
                     </section>
-                </div>
-                <ResearchCard environment1={2}
-                              environment2={3}
-                              figureShape1={[[1, 1, 1, 1]]}
-                              figureShape2={[[1, 0, 0], [0, 1, 0], [0, 0, 1]]}
-                              researchImage={expl}/>
-                <div className={s.turn_buttons_wrapper}>
-                    <Button colorType={"deny"} type={"button"}
-                            onClick={denyBoardChanges}
-                    >
-                        Отменить действие
-                    </Button>
-                    <Button colorType={"accept"} type={"button"}>
-                        Закончить ход
-                    </Button>
-                </div>
-                <div>Монеты: {coins}</div>
-            </section>
-        </div>
-    );
-};
+                    <section className={s.interactions_wrapper}>
+                        <div className={s.season}>
+                            <div className={s.tasks}>
+                                <TaskCard letter={"A"} taskImage={task1}/>
+                                <TaskCard letter={"B"} taskImage={task2}/>
+                                <TaskCard letter={"C"} taskImage={task3}/>
+                                <TaskCard letter={"D"} taskImage={task4}/>
+                            </div>
+                            <SeasonCard seasonImage={season}/>
+                            <section className={s.buttons_wrapper}>
+                                <Link to={ALL_ROOMS_ROUTE}>
+                                    <Button colorType={"deny"} type={"button"}>
+                                        Выйти
+                                    </Button>
+                                </Link>
+                                <Player url={backgroundSound}/>
+                                <img className={s.playersIcon} src={playersIcon} alt="игроки"/>
+                            </section>
+                        </div>
+                        <ResearchCard environment1={1}
+                                      environment2={3}
+                                      figureShape1={JSON.parse(JSON.stringify(gameData.card.figure))}
+                                      figureShape2={JSON.parse(JSON.stringify(gameData.card.other_figure))}
+                                      researchImage={expl}
+                                      isAnomaly={false}
+                                      figureAvailable={figureAvailable}
+                        />
+                        <div className={s.turn_buttons_wrapper}>
+                            <Button colorType={"deny"} type={"button"}
+                                    onClick={denyBoardChanges}
+                            >
+                                Отменить действие
+                            </Button>
+                            <Button colorType={"accept"} type={"button"}
+                                    onClick={endTurn}
+                            >
+                                Закончить ход
+                            </Button>
+                        </div>
+                        <div>Монеты: {gameData.coins}</div>
+                    </section>
+                </div>}
+        </>);
+
+    }
+;
 
 export default GameTable;

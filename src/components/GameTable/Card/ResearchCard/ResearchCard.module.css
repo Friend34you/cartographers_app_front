@@ -40,6 +40,10 @@
     margin: 5px;
 }
 
+.disabled {
+    opacity: 0.5;
+}
+
 .card_wrapper {
     height: 260px;
     width: 190px;

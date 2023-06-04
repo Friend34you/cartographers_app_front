@@ -1,4 +1,5 @@
 import Cell from "./Cell";
+import {CellTypes} from "../utils/cellTypes";
 
 
 export default class Board {
@@ -23,6 +24,17 @@ export default class Board {
             }
             this.cells.push(row)
         }
+        this.cells[1][3] = CellTypes.MOUNTAIN;
+        this.cells[2][8] = CellTypes.MOUNTAIN;
+        this.cells[5][5] = CellTypes.MOUNTAIN;
+        this.cells[8][2] = CellTypes.MOUNTAIN;
+        this.cells[8][1] = CellTypes.RUINS;
+        this.cells[1][5] = CellTypes.RUINS;
+        this.cells[2][1] = CellTypes.RUINS;
+        this.cells[2][9] = CellTypes.RUINS;
+        this.cells[8][9] = CellTypes.RUINS;
+        this.cells[9][5] = CellTypes.RUINS;
+        this.cells[9][7] = CellTypes.MOUNTAIN;
     }
 
     public getCopyBoard() {

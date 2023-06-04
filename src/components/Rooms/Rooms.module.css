@@ -8,3 +8,11 @@
     padding: 20px 0;
     overflow: auto;
 }
+
+.loading {
+    height: 90vh;
+}
+
+.error {
+    height: 90vh;
+}

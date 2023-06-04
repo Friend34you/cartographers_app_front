@@ -25,6 +25,7 @@ const FigureCell:FC<FigureCellProps> = ({dragCell, y, x, type}) => {
 
     return (
         <div
+            draggable={false}
             onMouseDown={getCellCoordinates}
             className={type !== 0
                 ? `${s.cell} ${s.filled}`

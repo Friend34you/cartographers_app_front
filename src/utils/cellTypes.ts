@@ -1,4 +1,4 @@
-export enum CellTypes {
+export const enum CellTypes {
     EMPTY,
     FOREST,
     VILLAGE,
