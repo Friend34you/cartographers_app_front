@@ -1,11 +1,13 @@
 import React, {FC, useState} from 'react';
 import s from "./RegistrationForm.module.css";
 import Button from "../../common/Button/Button";
-import {useForm} from "react-hook-form";
+import {FieldValues, useForm} from "react-hook-form";
 import view from "./../../../static/view.png"
 import hide from "./../../../static/hide.png"
+import {authAPI} from "../../../services/AuthService";
 
 const RegistrationForm: FC = () => {
+    const [registrate, {data: response, isLoading, isError, isSuccess, error}] = authAPI.useRegistrationMutation()
     const {register, watch, handleSubmit, reset, formState: {errors}} = useForm({
         mode: "onBlur",
     });
@@ -13,7 +15,11 @@ const RegistrationForm: FC = () => {
     const eye = passwordShown
         ? hide
         : view
-    const onSubmit = (data: object) => {
+    const onSubmit = (data: FieldValues) => {
+        registrate({
+            username: data.username,
+            password: data.password
+        })
         reset();
     }
 
@@ -24,6 +30,8 @@ const RegistrationForm: FC = () => {
     function togglePasswordVisibility() {
         setPasswordShown(prev => !prev)
     }
+
+    if (isSuccess) console.log(response)
 
     return (
         <div>
@@ -100,9 +108,13 @@ const RegistrationForm: FC = () => {
                         }
                     },
                 })} />
-
+                {error &&
+                    <p className={s.error}>
+                        Ошибка сервера
+                    </p>}
+                {isSuccess && <p>Вы успешно зарегистрировались</p>}
                 <div className={s.buttons_wrapper}>
-                    <Button type={"submit"} colorType={"deny"} onClick={clearFields}>Очистить</Button>
+                    <Button type={"button"} colorType={"deny"} onClick={clearFields}>Очистить</Button>
                     <Button type={"submit"} colorType={"accept"}>Зарегистрироваться</Button>
                 </div>
             </form>

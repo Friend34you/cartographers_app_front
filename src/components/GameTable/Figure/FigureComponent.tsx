@@ -9,10 +9,9 @@ import invertH from "./../../../static/invertHorizontal2.png"
 interface FigureProps {
     type: number;
     shape: number[][];
-    draggable: boolean
 }
 
-const FigureComponent: FC<FigureProps> = ({type, shape, draggable}) => {
+const FigureComponent: FC<FigureProps> = ({type, shape}) => {
     const mas = fillTypeToFigure(shape, type);
     const [figure, setFigure] = useState(new Figure(mas))
     const dragCell = {
@@ -93,15 +92,15 @@ const FigureComponent: FC<FigureProps> = ({type, shape, draggable}) => {
             </section>
             <div style={{width: "fit-content", height: "fit-content"}}
 
-                 draggable={draggable}
+                 draggable={"true"}
                  onDragStart={(e: React.DragEvent) => {
                      e.dataTransfer.setData("data", JSON.stringify(dragCell))
                  }}
             >
                 {figure.cells.map((row, y) =>
-                    <div className={s.row}>
+                    <div className={s.row} key={y}>
                         {row.map((el, x) =>
-                            <FigureCell type={figure.cells[y][x]} x={x} y={y} dragCell={dragCell}/>)}
+                            <FigureCell type={figure.cells[y][x]} x={x} y={y} dragCell={dragCell} key={x}/>)}
                     </div>)}
             </div>
         </div>

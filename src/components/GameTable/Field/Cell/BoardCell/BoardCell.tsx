@@ -26,10 +26,11 @@ const BoardCell:FC<BoardCellProps> = ({y, x, type, field, updateBoard}) => {
                 e.preventDefault()
                 console.log(e.target)
                 let figureData = e.dataTransfer.getData("data")
-                const data = JSON.parse(figureData)
-
-                field!.cells = setFigureOnField(data.figure, data.x, data.y, field?.cells, x, y)
-                updateBoard!()
+                if (figureData) {
+                    const data = JSON.parse(figureData)
+                    field.cells = setFigureOnField(data.figure, data.x, data.y, field?.cells, x, y)
+                    updateBoard()
+                }
             }}
 
             className={s.cell}

@@ -6,6 +6,7 @@ import {roomAPI} from "../../../services/RoomService";
 import {Navigate} from "react-router-dom";
 import {ROOM_ROUTE} from "../../../utils/consts";
 import {ifError} from "assert";
+import Loader from "../../common/Loader/Loader";
 
 interface CreateRoomProps {
     setModal: Function;
@@ -58,7 +59,7 @@ const CreateRoomForm: FC<CreateRoomProps> = ({setModal}) => {
                         <option key={value} value={value}>{value}</option>)}
                 </select>
                 <Input value={password} onChange={handlePassword} type={"password"} title={"Пароль (опционально)"}/>
-                {isLoading && <div>Загрузка...</div>}
+                {isLoading && <Loader sidePxSize={35}/>}
                 {isError && <div>Произошла ошибка</div>}
                 {isSuccess && <Navigate to={ROOM_ROUTE}/>}
             </section>

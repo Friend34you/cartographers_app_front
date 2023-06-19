@@ -1,22 +1,45 @@
+import {IPlayer} from "./IPlayer";
+import {ITask} from "./ITask";
+
 export interface IGame {
-    "room_name": string,
-    "field": number[][],
+    "id": number;
+    "room_name": string;
+    "player_field": number[][];
     "seasons": {
-        "spring": string,
-        "summer": string,
-        "autumn": string,
-        "winter": string
+        "spring": string;
+        "summer": string;
+        "autumn": string;
+        "winter": string;
     },
-    "current_season": string,
-    "player_scores": [
-        1,2,3,4
-    ],
-    "card": {
-        "picture": string,
-        "figure": number[][],
-        "other_figure": number[][]
+    "tasks": {
+        "first": ITask;
+        "second": ITask;
+        "third": ITask;
+        "fourth": ITask;
     },
-    "onRuins": boolean,
-    "coins": number,
-    "score": number
+    "current_season_name": "spring" | "summer" | "autumn" | "winter";
+    "players": IPlayer[]
+    "discovery_card": {
+        "image": string;
+        "is_anomaly": boolean;
+        "terrain_int": null | number;
+        "additional_terrain_int": null | number;
+        "shape": null | {
+            "shape_value": number[][];
+            "gives_coin": boolean;
+        };
+        "additional_shape": null | {
+            "shape_value": number[][];
+            "gives_coin": boolean;
+        };
+    },
+    "is_prev_card_ruins": boolean;
+    "season_scores": {
+        "spring_score": IGame;
+        "summer_scores": IGame;
+        "fall_score": IGame;
+        "winter_score": IGame;
+    };
+    "player_coins": number,
+    "player_score": number
 }

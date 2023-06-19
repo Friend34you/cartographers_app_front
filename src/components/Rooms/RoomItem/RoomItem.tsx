@@ -3,9 +3,10 @@ import {IRoom} from "../../../models/IRoom";
 import s from "./RoomItem.module.css"
 import Modal from "../../common/Modal/Modal";
 import Button from "../../common/Button/Button";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {ROOM_ROUTE} from "../../../utils/consts";
 import Input from "../../common/Input/Input";
+import {roomAPI} from "../../../services/RoomService";
 
 interface RoomItemProps {
     room: IRoom;
@@ -13,13 +14,12 @@ interface RoomItemProps {
 
 const RoomItem: FC<RoomItemProps> = ({room}) => {
     const [modalActive, setModalActive] = useState(false)
+    const [enterRoom, {isSuccess}] = roomAPI.useEnterRoomMutation()
     const handleOnClickModal = () => setModalActive(true)
-    const handleOnClickRoom = () => console.log("Тык")
-
-    const onClick = room.contains_password
-        ? handleOnClickModal
-        : handleOnClickRoom
-
+    const handleOnClickRoom = () => {
+        console.log("Тык");
+        enterRoom(room.id)
+    }
 
     return (
         <>
@@ -33,18 +33,17 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
                         room.contains_password
                             ? <Button
                                 colorType={"accept"}
-                                onClick={onClick}>
+                                onClick={handleOnClickModal}>
                                 Войти
                             </Button>
-                            : <Link to={ROOM_ROUTE}>
-                                <Button
-                                    colorType={"accept"}
-                                    onClick={onClick}>
-                                    Войти
-                                </Button>
-                            </Link>
+                            :
+                            <Button
+                                colorType={"accept"}
+                                onClick={handleOnClickRoom}>
+                                Войти
+                            </Button>
                     }
-
+                    {isSuccess && <Navigate to={ROOM_ROUTE}/>}
                 </div>
             </div>
             <Modal active={modalActive} setActive={setModalActive}>
@@ -54,7 +53,9 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
 
                 <Link to={ROOM_ROUTE}>
                     <Button
-                        colorType={"accept"}>
+                        colorType={"accept"}
+                        onClick={handleOnClickRoom}
+                    >
                         Войти
                     </Button>
                 </Link>

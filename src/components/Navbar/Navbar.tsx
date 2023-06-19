@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from "./Navbar.module.css"
 import Button from "../common/Button/Button";
 import useDebounce from "../../hooks/useDebounce";
@@ -9,19 +9,26 @@ import CreateRoomForm from "./CreateRoomForm/CreateRoomForm";
 import Input from "../common/Input/Input";
 import InviteCodeEnterForm from "./InviteCodeEnterForm/InviteCodeEnterForm";
 import {userAPI} from "../../services/UserService";
-import {redirect} from "react-router-dom";
-import {AUTH_ROUTE} from "../../utils/consts";
+import {AuthContext} from "../AppRouter";
+import Loader from "../common/Loader/Loader";
 
 const Navbar = () => {
+    const {setIsAuthorized} = useContext(AuthContext)
     const [codeEnterModal, setCodeEnterModal] = useState(false);
     const [createRoomModal, setCreateRoomModal] = useState(false);
     const [userOptionsVisibility, setUserOptionsVisibility] = useState(false);
+
     const [searchValue, setSearchValue] = useState('');
+
     const [findRoom, {data}] = roomAPI.useFindRoomMutation()
-    const {data: user, isSuccess} = userAPI.useFetchUserDataQuery("", {})
+    const {data: user, isSuccess, isFetching} = userAPI.useFetchUserDataQuery("", {
+        refetchOnMountOrArgChange: true
+    })
+
     const debouncedCallback = useDebounce((value: string) => {
         return findRoom(value)
     }, 1000)
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(searchValue)
         setSearchValue(e.target.value);
@@ -29,8 +36,8 @@ const Navbar = () => {
     }
 
     const handleLogout = () => {
-        localStorage.removeItem("token")
-        redirect(AUTH_ROUTE)
+        localStorage.removeItem("token");
+        setIsAuthorized && setIsAuthorized(false)
     }
 
     if (isSuccess) console.log(user)
@@ -60,7 +67,8 @@ const Navbar = () => {
                     />
                 </section>
                 <section className={s.user_wrapper} onClick={() => setUserOptionsVisibility(prev => !prev)}>
-                    {user && <span>{user.username}</span>}
+                    {isFetching && <Loader sidePxSize={35}/>}
+                    {!isFetching && isSuccess && <span>{user.username}</span>}
                     <UserIcon/>
                 </section>
             </div>

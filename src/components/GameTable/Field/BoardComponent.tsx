@@ -12,9 +12,10 @@ const BoardComponent:FC<FieldProps> = ({board, updateBoard}) => {
     return (
         <div className={s.field}>
             {board.cells.map((row: any, y: any) =>
-                <React.Fragment>
+                <React.Fragment key={y}>
                     {row.map((el: any, x: any) =>
                         <BoardCell
+                            key={x}
                             type={board.cells[y][x]}
                             field={board}
                             updateBoard={updateBoard}

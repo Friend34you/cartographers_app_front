@@ -6,14 +6,20 @@ export const gameAPI = roomAPI.injectEndpoints(
         endpoints: (builder) => ({
             getGameTurn: builder.query<IGame, any>({
                 query: () => ({
-                    url: '/game'
+                    url: '/games/game/'
                 })
             }),
             endTurn: builder.mutation<number[][], any>({
                 query: (field) => ({
-                    url: '/game',
+                    url: '/games/game/',
                     method: "PUT",
                     body: field,
+                })
+            }),
+            startGame: builder.mutation<any, void>({
+                query: () => ({
+                    url: '/games/game/',
+                    method: "POST",
                 })
             }),
         })

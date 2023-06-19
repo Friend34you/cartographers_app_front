@@ -3,7 +3,7 @@ import {roomAPI} from "./RoomService";
 export const authAPI = roomAPI.injectEndpoints(
     {
         endpoints: (builder) => ({
-            registration: builder.mutation<object, any>({
+            registration: builder.mutation<any, any>({
                 query: (userData) => ({
                     url: 'auth/users/',
                     method: "POST",

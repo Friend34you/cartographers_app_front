@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import s from "../AuthorizationForm/AuthorizationForm.module.css";
 import Button from "../../common/Button/Button";
 import {useForm} from "react-hook-form";
@@ -6,8 +6,10 @@ import view from "./../../../static/view.png"
 import hide from "./../../../static/hide.png"
 import {authAPI} from "../../../services/AuthService";
 import {FetchBaseQueryError} from "@reduxjs/toolkit/query";
+import {AuthContext} from "../../AppRouter";
 
 const AuthorizationForm = () => {
+    const {setIsAuthorized} = useContext(AuthContext)
     const [authorize, {data: token, isLoading, isError, isSuccess, error}] = authAPI.useAuthorizationMutation()
     const {register, handleSubmit, reset, formState: {errors}} = useForm({
         mode: "onBlur",
@@ -34,7 +36,8 @@ const AuthorizationForm = () => {
     }
 
     if (isSuccess) {
-        localStorage.setItem("token" ,token?.auth_token!)
+        localStorage.setItem("token" ,token?.auth_token!);
+        setIsAuthorized && setIsAuthorized(true)
     }
 
     return (
@@ -79,7 +82,7 @@ const AuthorizationForm = () => {
                         Неверные данные
                     </p>}
                 <div className={s.buttons_wrapper}>
-                    <Button type={"submit"} colorType={"deny"} onClick={clearFields}>Очистить</Button>
+                    <Button type={"button"} colorType={"deny"} onClick={clearFields}>Очистить</Button>
                     <Button type={"submit"} colorType={"accept"}>Войти</Button>
                 </div>
             </form>

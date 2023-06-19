@@ -4,13 +4,14 @@ import RoomItem from "./RoomItem/RoomItem";
 import Navbar from "../Navbar/Navbar";
 import s from "./Rooms.module.css"
 import useScroll from "../../hooks/useScroll";
+import Loader from "../common/Loader/Loader";
 
 const Rooms: React.FC = () => {
     const parentRef = useRef<HTMLInputElement>(null);
     const childRef = useRef<HTMLInputElement>(null);
 
     const [page, setPage] = useState(1)
-    const {data: rooms, isLoading, isError, isSuccess} = roomAPI.useFetchAllRoomsQuery("", {
+    const {data: rooms, isLoading, isError, isSuccess} = roomAPI.useFetchAllRoomsQuery(page, {
         pollingInterval: 10000,
         refetchOnMountOrArgChange: true
     })
@@ -22,7 +23,7 @@ const Rooms: React.FC = () => {
     return (
         <div>
             <div ref={parentRef} className={s.rooms_container}>
-                {isLoading && <div className={s.loading}>Загрузка...</div>}
+                {isLoading && <div className={s.loading}><Loader sidePxSize={100}/></div>}
                 {isError && <div className={s.error}>ОШИБКА</div>}
                 {rooms && rooms.map(room =>
                     <RoomItem
