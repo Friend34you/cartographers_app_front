@@ -1,12 +1,13 @@
 import React, {FC, useState} from 'react';
 import {IRoom} from "../../../models/IRoom";
 import s from "./RoomItem.module.css"
-import Modal from "../../common/Modal/Modal";
-import Button from "../../common/Button/Button";
+import lockIcon from "../../../static/roomItemPadlock/padlock.png"
 import {Link, Navigate} from "react-router-dom";
 import {ROOM_ROUTE} from "../../../utils/consts";
-import Input from "../../common/Input/Input";
 import {roomAPI} from "../../../services/RoomService";
+import Modal from "../../common/Modal/Modal";
+import Input from "../../common/Input/Input";
+import Button from "../../common/Button/Button";
 
 interface RoomItemProps {
     room: IRoom;
@@ -26,19 +27,20 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
             <div className={s.item}>
                 <h2>{room.name}</h2>
                 <p>{room.current_users} / {room.max_users}</p>
-                <p>С паролем: {room.contains_password ? "Да" : "нет"}</p>
-                <div>Игра стартовала? {room.is_game_started}</div>
+                {room.contains_password && <img className={s.lock_img} src={lockIcon} alt="с паролем"/>}
                 <div className={s.button_container}>
                     {
                         room.contains_password
                             ? <Button
                                 colorType={"accept"}
+                                isDisabled={room.is_game_started}
                                 onClick={handleOnClickModal}>
                                 Войти
                             </Button>
                             :
                             <Button
                                 colorType={"accept"}
+                                isDisabled={room.is_game_started}
                                 onClick={handleOnClickRoom}>
                                 Войти
                             </Button>
@@ -50,15 +52,16 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
                 <h1>{room.name}</h1>
                 <p>{room.current_users} / {room.max_users}</p>
                 <Input type={"password"} title={"Пароль:"} placeholder={"Введите пароль..."}/>
-
-                <Link to={ROOM_ROUTE}>
-                    <Button
-                        colorType={"accept"}
-                        onClick={handleOnClickRoom}
-                    >
-                        Войти
-                    </Button>
-                </Link>
+                <div className={s.button_container}>
+                    <Link to={ROOM_ROUTE}>
+                        <Button
+                            colorType={"accept"}
+                            onClick={handleOnClickRoom}
+                        >
+                            Войти
+                        </Button>
+                    </Link>
+                </div>
 
             </Modal>
         </>

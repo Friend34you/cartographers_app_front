@@ -13,6 +13,7 @@ export const roomAPI = createApi({
             return headers
         }
     }),
+    tagTypes: ['UserList'],
     endpoints: (builder) => ({
         fetchAllRooms: builder.query<IRoom[], number>({
             query: (page: number = 1, limit: number = 10) => ({
@@ -26,7 +27,8 @@ export const roomAPI = createApi({
         fetchRoom: builder.query<IRoom, any>({
             query: () => ({
                 url: `/rooms/room/`,
-            })
+            }),
+            providesTags: ['UserList']
         }),
         findRoom: builder.mutation<any, any>({
             query: (roomName) => ({
@@ -59,12 +61,19 @@ export const roomAPI = createApi({
                 method: 'DELETE',
             })
         }),
+        changeReadiness: builder.mutation<any, void>({
+            query: () => ({
+                url: '/rooms/ready/',
+                method: 'PUT',
+            })
+        }),
         kickUser: builder.mutation<any, any>({
             query: (user_to_kick_id) => ({
                 url: '/rooms/user/',
                 method: "DELETE",
                 params: {user_to_kick_id}
-            })
+            }),
+            invalidatesTags: ['UserList']
         }),
     })
 

@@ -1,8 +1,9 @@
 .item {
+    position: relative;
     padding: 15px 20px;
     margin: 10px 15px;
-    width: 30vw;
-    max-width: 46%;
+    width: 20vw;
+    /*max-width: 46%;*/
     background: #FFFFFF;
     border: 2px solid #14A0DC;
     box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.15);
@@ -12,4 +13,12 @@
 .button_container {
     display: flex;
     justify-content: flex-end;
+}
+
+.lock_img {
+    width: 30px;
+    right: 20px;
+    top: 20px;
+    height: 30px;
+    position: absolute;
 }

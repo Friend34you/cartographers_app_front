@@ -4,7 +4,6 @@ import Button from "../common/Button/Button";
 import s from "./AuthPage.module.css"
 import RegistrationForm from "./RegistrationForm/RegistrationForm";
 import AuthorizationForm from "./AuthorizationForm/AuthorizationForm";
-import mainImg from "./../../static/Cartographers A Roll Player Tale.jpg"
 const AuthPage: FC = () => {
     const [registrationModal, setRegistrationModal] = useState(false);
     const [authorizationModal, setAuthorizationModal] = useState(false);
@@ -27,9 +26,7 @@ const AuthPage: FC = () => {
                 <Button colorType={"accept"} onClick={handleOnClickRegistration}>Регистрация</Button>
                 <Button colorType={"accept"} onClick={handleOnClickAuthorization}>Вход</Button>
             </nav>
-            <div className={s.img_wrapper}>
-                {/*<img src={mainImg} alt=""/>*/}
-            </div>
+            <div className={s.img_wrapper}/>
             <Modal active={registrationModal} setActive={setRegistrationModal}>
                 <RegistrationForm/>
             </Modal>

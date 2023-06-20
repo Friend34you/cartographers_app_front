@@ -8,7 +8,7 @@ export interface IRoom {
     contains_password: boolean;
     generated_key?: string;
     admin_id?: number;
-    are_users_ready?: boolean;
+    is_ready_for_game?: boolean;
     is_game_started: boolean;
     users: IUser[];
 }

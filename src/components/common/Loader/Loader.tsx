@@ -4,8 +4,10 @@ import s from "./Loader.module.css"
 interface LoaderProps {
     sidePxSize: number
 }
+
 const Loader: FC<LoaderProps> = ({sidePxSize}) => {
     return (
+        <div className={s.wrapper}>
             <svg width={sidePxSize} height={sidePxSize} viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
@@ -23,7 +25,7 @@ const Loader: FC<LoaderProps> = ({sidePxSize}) => {
                                 from="0 18 18"
                                 to="360 18 18"
                                 dur="0.9s"
-                                repeatCount="indefinite" />
+                                repeatCount="indefinite"/>
                         </path>
                         <circle fill="#fff" cx="36" cy="18" r="1">
                             <animateTransform
@@ -32,11 +34,13 @@ const Loader: FC<LoaderProps> = ({sidePxSize}) => {
                                 from="0 18 18"
                                 to="360 18 18"
                                 dur="0.9s"
-                                repeatCount="indefinite" />
+                                repeatCount="indefinite"/>
                         </circle>
                     </g>
                 </g>
             </svg>
+        </div>
+
     );
 };
 
