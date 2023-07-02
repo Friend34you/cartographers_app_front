@@ -118,6 +118,7 @@ const Room: FC = () => {
                                 Покинуть комнату
                             </Button>
                             {isLeaveRoomSuccess && <Navigate to={ALL_ROOMS_ROUTE}/>}
+                            {isStartGameLoading && <Loader sidePxSize={35}/>}
                             {currentUserData!.id === room.admin_id
                                 ?
                                 <Button colorType={"accept"}
@@ -135,7 +136,6 @@ const Room: FC = () => {
                                 </Button>
                             }
                         </div>
-                        {isStartGameLoading && <Loader sidePxSize={35}/>}
                         {isStartGameError && <div>Ошибка</div>}
                         {!isStartGameError && isStartGameSuccess && <Navigate to={GAME_ROUTE}/>}
                         {room.is_game_started && <Navigate to={GAME_ROUTE}/>}

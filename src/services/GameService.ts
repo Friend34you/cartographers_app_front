@@ -4,6 +4,12 @@ import {IGame} from "../models/IGame";
 export const gameAPI = roomAPI.injectEndpoints(
     {
         endpoints: (builder) => ({
+            startGame: builder.mutation<any, void>({
+                query: () => ({
+                    url: '/games/game/',
+                    method: "POST",
+                })
+            }),
             getGameTurn: builder.query<IGame, any>({
                 query: () => ({
                     url: '/games/game/'
@@ -11,15 +17,21 @@ export const gameAPI = roomAPI.injectEndpoints(
             }),
             endTurn: builder.mutation<number[][], any>({
                 query: (field) => ({
-                    url: '/games/game/',
+                    url: '/games/move/',
                     method: "PUT",
                     body: field,
                 })
             }),
-            startGame: builder.mutation<any, void>({
+            checkNewTurn: builder.mutation<any, void>({
                 query: () => ({
-                    url: '/games/game/',
-                    method: "POST",
+                    url: '/games/move/',
+                    method: "GET",
+                })
+            }),
+            leaveGame: builder.mutation<any, void>({
+                query: () => ({
+                    url: '/games/leave/',
+                    method: 'DELETE',
                 })
             }),
         })

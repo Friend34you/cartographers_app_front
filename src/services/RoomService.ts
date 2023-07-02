@@ -53,6 +53,7 @@ export const roomAPI = createApi({
                 body: {
                     room_id,
                 },
+                invalidatesTags: ['UserList']
             })
         }),
         leaveRoom: builder.mutation<any, void>({

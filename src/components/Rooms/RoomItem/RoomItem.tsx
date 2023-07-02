@@ -1,13 +1,14 @@
 import React, {FC, useState} from 'react';
 import {IRoom} from "../../../models/IRoom";
 import s from "./RoomItem.module.css"
-import lockIcon from "../../../static/roomItemPadlock/padlock.png"
+import lockIcon from "../../../static/roomItemPadlock/padlock1.png"
 import {Link, Navigate} from "react-router-dom";
 import {ROOM_ROUTE} from "../../../utils/consts";
 import {roomAPI} from "../../../services/RoomService";
 import Modal from "../../common/Modal/Modal";
 import Input from "../../common/Input/Input";
 import Button from "../../common/Button/Button";
+import Loader from "../../common/Loader/Loader";
 
 interface RoomItemProps {
     room: IRoom;
@@ -15,7 +16,7 @@ interface RoomItemProps {
 
 const RoomItem: FC<RoomItemProps> = ({room}) => {
     const [modalActive, setModalActive] = useState(false)
-    const [enterRoom, {isSuccess}] = roomAPI.useEnterRoomMutation()
+    const [enterRoom, {isSuccess, isLoading}] = roomAPI.useEnterRoomMutation()
     const handleOnClickModal = () => setModalActive(true)
     const handleOnClickRoom = () => {
         console.log("Тык");
@@ -29,6 +30,7 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
                 <p>{room.current_users} / {room.max_users}</p>
                 {room.contains_password && <img className={s.lock_img} src={lockIcon} alt="с паролем"/>}
                 <div className={s.button_container}>
+                    {isLoading && <Loader sidePxSize={30}/>}
                     {
                         room.contains_password
                             ? <Button
@@ -53,14 +55,13 @@ const RoomItem: FC<RoomItemProps> = ({room}) => {
                 <p>{room.current_users} / {room.max_users}</p>
                 <Input type={"password"} title={"Пароль:"} placeholder={"Введите пароль..."}/>
                 <div className={s.button_container}>
-                    <Link to={ROOM_ROUTE}>
-                        <Button
-                            colorType={"accept"}
-                            onClick={handleOnClickRoom}
-                        >
-                            Войти
-                        </Button>
-                    </Link>
+                    {isLoading && <Loader sidePxSize={30}/>}
+                    <Button
+                        colorType={"accept"}
+                        onClick={handleOnClickRoom}
+                    >
+                        Войти
+                    </Button>
                 </div>
 
             </Modal>

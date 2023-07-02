@@ -2,6 +2,11 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    /*background-image: url("https://i.pinimg.com/originals/ff/3b/e5/ff3be5562335e93e1d7b5d3d44b8c15d.jpg");*/
+    /*background-image: url("https://s1.1zoom.me/b5050/386/352308-admin_2048x1152.jpg");*/
+    /*background-image: url("./../../static/для отчёта/spring.png");*/
+    background-size: cover;
+    background-position: center;
 }
 
 .interactions_wrapper {
@@ -53,4 +58,25 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+.userList {
+    max-height: 30vh;
+    overflow: auto;
+}
+
+.userItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.userItem__info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }

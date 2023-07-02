@@ -59,12 +59,12 @@ const CreateRoomForm: FC<CreateRoomProps> = ({setModal}) => {
                         <option key={value} value={value}>{value}</option>)}
                 </select>
                 <Input value={password} onChange={handlePassword} type={"password"} title={"Пароль (опционально)"}/>
-                {isLoading && <Loader sidePxSize={35}/>}
                 {isError && <div>Произошла ошибка</div>}
                 {isSuccess && <Navigate to={ROOM_ROUTE}/>}
             </section>
             <section className={s.buttons_wrapper}>
                 <Button colorType={"deny"} onClick={handleDeny}>Отмена</Button>
+                {isLoading && <Loader sidePxSize={35}/>}
                 <Button colorType={"accept"} onClick={handleAccept}>Создать</Button>
             </section>
         </div>
