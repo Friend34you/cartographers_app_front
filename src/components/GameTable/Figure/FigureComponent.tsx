@@ -12,7 +12,8 @@ interface FigureProps {
 }
 
 const FigureComponent: FC<FigureProps> = ({type, shape}) => {
-    const mas = fillTypeToFigure(shape, type);
+    let mas = [[0,0,0]]
+    // const mas = fillTypeToFigure(shape, type);
     const [figure, setFigure] = useState(new Figure(mas))
     const dragCell = {
         x: 0,
@@ -21,6 +22,7 @@ const FigureComponent: FC<FigureProps> = ({type, shape}) => {
     }
 
     useEffect(() => {
+        mas = fillTypeToFigure(shape, type);
         updateFigure(mas)
         console.log(mas)
     }, [type, shape])

@@ -42,9 +42,13 @@ const GameTable: FC = () => {
         const [modalActive, setModalActive] = useState(false)
 
         useEffect(() => {
-            restart();
+            if (isSuccess) {
 
-        }, [])
+                restart();
+                console.log("поле поменялось")
+                denyBoardChanges();
+            }
+        }, [gameData])
 
         function restart() {
             const newBoard = new Board();
@@ -94,9 +98,9 @@ const GameTable: FC = () => {
             console.log(gameData);
         }
 
-        if (isFetching) {
-            return (<Loader sidePxSize={100}/>)
-        }
+        // if (isFetching) {
+        //     return (<Loader sidePxSize={100}/>)
+        // }
 
         return (<>
             {isLoading && <Loader sidePxSize={100}/>}
@@ -139,7 +143,9 @@ const GameTable: FC = () => {
                                 <Button colorType={"deny"} type={"button"} onClick={denyBoardChanges}>
                                     Отменить действие
                                 </Button>
-                                <Button colorType={"accept"} type={"button"} onClick={() => {checkNewTurn()}}>
+                                <Button colorType={"accept"} type={"button"} onClick={() => {
+                                    checkNewTurn()
+                                }}>
                                     Проверка на новый ход
                                 </Button>
                                 <Button colorType={"accept"} type={"button"}
