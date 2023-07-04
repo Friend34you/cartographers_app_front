@@ -34,7 +34,7 @@ const GameTable: FC = () => {
                 isSuccess: isLeaveGameSuccess,
                 isError: isLeaveGameError
             }] = gameAPI.useLeaveGameMutation();
-        const [checkNewTurn, {data: checkTurnData, isSuccess: isCheckTurnSuccess}] = gameAPI.useCheckNewTurnMutation();
+        const [checkNewTurn, {data: checkNewTurnData, isSuccess: isCheckTurnSuccess}] = gameAPI.useCheckNewTurnMutation();
         const [endTurn, {}] = gameAPI.useEndTurnMutation();
 
         const [board, setBoard] = useState(new Board())
@@ -80,6 +80,14 @@ const GameTable: FC = () => {
 
         async function handleEndTurn() {
             await endTurn(board.cells);
+            // const checking = setInterval(async ()=>{
+            //     const isNewTurn = await checkNewTurn();
+            //     console.log("проверка на новый ход")
+            //     if (isNewTurn) {
+            //         refetch();
+            //         clearInterval(checking)
+            //     }
+            // }, 3000)
         }
 
         async function handleLeaveGame() {
@@ -90,8 +98,8 @@ const GameTable: FC = () => {
             setModalActive(!modalActive)
         }
 
-        if (checkTurnData) {
-            console.log(checkTurnData);
+        if (isCheckTurnSuccess) {
+            console.log(checkNewTurnData);
         }
 
         if (isSuccess) {
@@ -136,7 +144,7 @@ const GameTable: FC = () => {
                                           figureShape1={gameData.discovery_card.shape?.shape_value}
                                           figureShape2={gameData.discovery_card.additional_shape?.shape_value}
                                           researchImage={gameData.discovery_card.image}
-                                          isAnomaly={false}
+                                          isAnomaly={gameData.discovery_card.is_anomaly}
                                           figureAvailable={figureAvailable}
                             />
                             <div className={s.turn_buttons_wrapper}>

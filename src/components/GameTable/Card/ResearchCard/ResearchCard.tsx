@@ -27,7 +27,8 @@ const ResearchCard: FC<ResearchCardProps> = ({
                                                  isAnomaly,
                                                  figureAvailable
                                              }) => {
-
+    const isCardAnomaly = isAnomaly || !checkFieldSpace();
+    // const [isCardAnomaly, toggleIsCardAnomaly] = useState(isAnomaly || !checkFieldSpace())
     const [figureEnvType, setFigureEnvType] = useState(environment1)
     console.log(figureEnvType)
 
@@ -35,36 +36,41 @@ const ResearchCard: FC<ResearchCardProps> = ({
     /** Если первый тип меняется, то ок, но если остаётся прежним, а до этого ещё был тип поля, фигуру которого выбрали,
      * то может произойти ситуация, кога не перерисовывается и это БАГ (надо тестить)**/
     useEffect(() => {
-        setFigureEnvType(environment1);
-        console.log("обнова компонента ресёрч")
-    }, [environment1, environment2])
+        if (!isCardAnomaly) {
+            setFigureEnvType(environment1);
+            console.log("обнова компонента ресёрч")
+        } else {
+            setFigureEnvType(CellTypes.FOREST)
+            console.log("вышла аномалия")
+        }
+    }, [environment1, environment2, isCardAnomaly])
 
     function checkFieldSpace() {
         return true
     }
 
     /** Нужно разобраться м тем, что не отрисовыввается нормально элемент при изменении типа поля или фигуры **/
-    // if (isAnomaly || !checkFieldSpace())
-    //     return (
-    //         <div
-    //             className={s.container}>
-    //             <section className={s.interactions}>
-    //
-    //                 <div className={s.cells_wrapper}>
-    //                     <Cell type={CellTypes.FOREST} onClick={setFigureEnvType}/>
-    //                     <Cell type={CellTypes.VILLAGE} onClick={setFigureEnvType}/>
-    //                     <Cell type={CellTypes.RIVER} onClick={setFigureEnvType}/>
-    //                     <Cell type={CellTypes.FIELD} onClick={setFigureEnvType}/>
-    //                     <Cell type={CellTypes.MONSTER} onClick={setFigureEnvType}/>
-    //                 </div>
-    //                 <div className={s.figures_wrapper}>
-    //                     <FigureComponent type={figureEnvType} shape={[[1]]} />
-    //                 </div>
-    //             </section>
-    //             <div className={s.card_wrapper}>
-    //                 <Card cardImage={researchImage}/>
-    //             </div>
-    //         </div>)
+    if (isCardAnomaly)
+        return (
+            <div className={s.container}>
+                <section className={s.interactions}>
+                    <div className={s.cells_wrapper}>
+                        <Cell type={CellTypes.FOREST} onClick={setFigureEnvType}/>
+                        <Cell type={CellTypes.VILLAGE} onClick={setFigureEnvType}/>
+                        <Cell type={CellTypes.FIELD} onClick={setFigureEnvType}/>
+                        <Cell type={CellTypes.RIVER} onClick={setFigureEnvType}/>
+                        <Cell type={CellTypes.MONSTER} onClick={setFigureEnvType}/>
+                    </div>
+                    <div className={s.figures_wrapper}>
+                        {figureAvailable &&
+                            <FigureComponent type={figureEnvType} shape={[[1]]}/>
+                        }
+                    </div>
+                </section>
+                <div className={s.card_wrapper}>
+                    <Card cardImage={researchImage}/>
+                </div>
+            </div>)
 
     return (
         <div className={s.container}>
