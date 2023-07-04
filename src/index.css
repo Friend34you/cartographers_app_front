@@ -15,9 +15,15 @@ body {
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
     background: #FAFAFA;
     /*background: #3f3f3f;*/
     font-size: 1.3rem;
+
+    /*background-image: url("https://s1.1zoom.me/b5050/386/352308-admin_2048x1152.jpg");*/
+    /*background-image: url("./static/для отчёта/spring2.png");*/
+    background-size: cover;
+    background-position: center;
 }
 
 button, input {

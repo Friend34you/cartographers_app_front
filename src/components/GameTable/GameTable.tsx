@@ -151,7 +151,7 @@ const GameTable: FC = () => {
                                 <Button colorType={"accept"} type={"button"}
                                         onClick={() => {
                                             refetch();
-                                            setFigureAvailable(true);
+                                            // setFigureAvailable(true);
                                         }}>
                                     Рефетч
                                 </Button>

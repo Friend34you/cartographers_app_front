@@ -1,5 +1,6 @@
 .card {
     border-radius: 15px;
+    border: solid black 3px;
     width: inherit;
     height: inherit;
     min-width: 80px;
