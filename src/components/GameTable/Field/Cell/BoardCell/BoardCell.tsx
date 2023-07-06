@@ -8,10 +8,12 @@ interface BoardCellProps {
     y: number;
     type: number;
     field: Board;
-    updateBoard: Function
+    updateBoard: Function;
+    isOnRuins: boolean
+
 }
 
-const BoardCell:FC<BoardCellProps> = ({y, x, type, field, updateBoard}) => {
+const BoardCell:FC<BoardCellProps> = ({y, x, type, field, updateBoard, isOnRuins}) => {
 
     return (
         <div
@@ -28,7 +30,7 @@ const BoardCell:FC<BoardCellProps> = ({y, x, type, field, updateBoard}) => {
                 let figureData = e.dataTransfer.getData("data")
                 if (figureData) {
                     const data = JSON.parse(figureData)
-                    field.cells = setFigureOnField(data.figure, data.x, data.y, field?.cells, x, y)
+                    field.cells = setFigureOnField(data.figure, data.x, data.y, field?.cells, x, y, isOnRuins)
                     updateBoard()
                 }
             }}

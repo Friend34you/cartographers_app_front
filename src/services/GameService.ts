@@ -22,7 +22,13 @@ export const gameAPI = roomAPI.injectEndpoints(
                     body: field,
                 })
             }),
-            checkNewTurn: builder.mutation<any, void>({
+            // checkNewTurn: builder.mutation<boolean, void>({
+            //     query: () => ({
+            //         url: '/games/move/',
+            //         method: "GET",
+            //     })
+            // }),
+            checkGameStatus: builder.mutation<string, void>({
                 query: () => ({
                     url: '/games/move/',
                     method: "GET",

@@ -33,7 +33,7 @@ export interface IGame {
             "gives_coin": boolean;
         };
     },
-    "is_prev_card_ruins": boolean;
+    "is_on_ruins": boolean;
     "season_scores": {
         "spring_score": IGame;
         "summer_scores": IGame;

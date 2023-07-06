@@ -54,3 +54,16 @@ code {
     background-color: #ECECEC;
 }
 
+@media (min-width: 481px) and (max-width: 768px) {
+    body {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: .9rem;
+    }
+}
+
+/*media queries params : (min-width: 481px) and (max-width: 768px); @media (max-width: 480px) */

@@ -1,31 +1,39 @@
 import React, {FC, useEffect, useState} from 'react';
+import {Navigate} from "react-router-dom";
 import s from "./GameTable.module.css"
+import backgroundSound from "./../../static/sounds/backgroundMusic/cool adventure music.mp3"
 import playersIcon from "../../static/players.svg"
 import fieldImg from "../../static/field.png"
-import {Link, Navigate} from "react-router-dom";
 import {ALL_ROOMS_ROUTE} from "../../utils/consts";
-import Button from "../common/Button/Button";
+import {gameAPI} from "../../services/GameService";
 import Board from "../../models/Board";
+import Button from "../common/Button/Button";
 import BoardComponent from "./Field/BoardComponent";
 import TaskCard from "./Card/TaskCard/TaskCard";
 import SeasonCard from "./Card/SeasonCard/SeasonCard";
 import ResearchCard from "./Card/ResearchCard/ResearchCard";
-import backgroundSound from "./../../static/sounds/backgroundMusic/cool adventure music.mp3"
 import Player from "../common/Player/Player";
+import Loader from "../common/Loader/Loader";
+import Modal from "../common/Modal/Modal";
+import UserIcon from "../common/UserIcon/UserIcon";
 
 //test images
 import task1 from "./../../static/для отчёта/img.png"
 import task2 from "./../../static/для отчёта/img_1.png"
 import task3 from "./../../static/для отчёта/img_2.png"
 import task4 from "./../../static/для отчёта/img_3.png"
-import {gameAPI} from "../../services/GameService";
-import Loader from "../common/Loader/Loader";
-import Modal from "../common/Modal/Modal";
-import UserIcon from "../common/UserIcon/UserIcon";
+import {GameStatusTypes} from "../../utils/gameStatusTypes";
 
 
 const GameTable: FC = () => {
-        const {data: gameData, isLoading, isError, isSuccess, isFetching, refetch} = gameAPI.useGetGameTurnQuery("", {
+        const {
+            data: gameData,
+            isLoading: isGameDataLoading,
+            isError: isGameDataError,
+            isSuccess: isGameDataSuccess,
+            isFetching: isGameDataFetching,
+            refetch
+        } = gameAPI.useGetGameTurnQuery("", {
             refetchOnMountOrArgChange: true,
         });
         const [leaveGame,
@@ -34,15 +42,27 @@ const GameTable: FC = () => {
                 isSuccess: isLeaveGameSuccess,
                 isError: isLeaveGameError
             }] = gameAPI.useLeaveGameMutation();
-        const [checkNewTurn, {data: checkNewTurnData, isSuccess: isCheckTurnSuccess}] = gameAPI.useCheckNewTurnMutation();
-        const [endTurn, {}] = gameAPI.useEndTurnMutation();
+        // const [checkNewTurn,
+        //     {
+        //         data: checkNewTurnData,
+        //         isSuccess: isCheckTurnSuccess,
+        //         isLoading: isCheckTurnLoading
+        //     }] = gameAPI.useCheckNewTurnMutation();
+        const [checkGameStatus,
+            {
+                data: checkGameStatusData,
+                isSuccess: isCheckGameStatusSuccess,
+                isLoading: isCheckGameStatusLoading
+            }] = gameAPI.useCheckGameStatusMutation();
+        const [endTurn, {isLoading: isEndTurnLoading}] = gameAPI.useEndTurnMutation();
 
         const [board, setBoard] = useState(new Board())
         const [figureAvailable, setFigureAvailable] = useState(true)
         const [modalActive, setModalActive] = useState(false)
+        const [isButtonDisabled, setButtonDisabled] = useState(false)
 
         useEffect(() => {
-            if (isSuccess) {
+            if (isGameDataSuccess) {
 
                 restart();
                 console.log("поле поменялось")
@@ -57,37 +77,43 @@ const GameTable: FC = () => {
         }
 
         function updateBoard() {
-            if (isSuccess) {
+            if (isGameDataSuccess) {
                 const newBoard = new Board();
                 newBoard.cells = board.cells;
                 setBoard(newBoard);
                 if (JSON.stringify(board.cells) !== JSON.stringify(gameData.player_field)) {
                     setFigureAvailable(false)
                 }
-                console.log(board)
             }
         }
 
         function denyBoardChanges() {
-            if (isSuccess) {
+            if (isGameDataSuccess) {
                 const newBoard = new Board();
                 newBoard.cells = JSON.parse(JSON.stringify(gameData.player_field));
-                console.log(gameData.player_field)
                 setBoard(newBoard);
                 setFigureAvailable(true);
             }
         }
 
+        /** Обработать возможность выпадения ошибки!!! **/
         async function handleEndTurn() {
+            if (figureAvailable) {
+                console.log("lox, postav' figuru")
+                return;
+            }
+            setButtonDisabled(true);
+
             await endTurn(board.cells);
-            // const checking = setInterval(async ()=>{
-            //     const isNewTurn = await checkNewTurn();
-            //     console.log("проверка на новый ход")
-            //     if (isNewTurn) {
-            //         refetch();
-            //         clearInterval(checking)
-            //     }
-            // }, 3000)
+            console.log("try to find time");
+            const timerId = setInterval(async () => {
+                const checkNewTurnRes = await checkGameStatus();
+                if ("data" in checkNewTurnRes && checkNewTurnRes.data === GameStatusTypes.newMoveStarted) {
+                    await refetch();
+                    clearInterval(timerId);
+                    setButtonDisabled(false);
+                }
+            }, 3000)
         }
 
         async function handleLeaveGame() {
@@ -98,11 +124,11 @@ const GameTable: FC = () => {
             setModalActive(!modalActive)
         }
 
-        if (isCheckTurnSuccess) {
-            console.log(checkNewTurnData);
+        if (isCheckGameStatusSuccess) {
+            console.log(checkGameStatusData);
         }
 
-        if (isSuccess) {
+        if (isGameDataSuccess) {
             console.log(gameData);
         }
 
@@ -111,15 +137,17 @@ const GameTable: FC = () => {
         // }
 
         return (<>
-            {isLoading && <Loader sidePxSize={100}/>}
-            {isError && <div>Error</div>}
-            {isSuccess &&
+            {isGameDataLoading && <Loader sidePxSize={100}/>}
+            {isGameDataError && <div>Error</div>}
+            {isGameDataSuccess &&
                 <>
                     <div className={s.container}>
                         <section className={s.field_wrapper}>
                             <h1>{gameData.room_name}</h1>
-                            <BoardComponent board={board} updateBoard={updateBoard}/>
+                            <h2>{gameData.is_on_ruins.toString()}</h2>
+                            <BoardComponent board={board} updateBoard={updateBoard} isOnRuins={gameData.is_on_ruins}/>
                             <img src={fieldImg} alt="" className={s.field_img}/>
+
                         </section>
                         <section className={s.interactions_wrapper}>
                             <div className={s.season}>
@@ -148,11 +176,14 @@ const GameTable: FC = () => {
                                           figureAvailable={figureAvailable}
                             />
                             <div className={s.turn_buttons_wrapper}>
-                                <Button colorType={"deny"} type={"button"} onClick={denyBoardChanges}>
+                                <Button colorType={"deny"} type={"button"}
+                                        onClick={denyBoardChanges}
+                                        isDisabled={isButtonDisabled}
+                                >
                                     Отменить действие
                                 </Button>
                                 <Button colorType={"accept"} type={"button"} onClick={() => {
-                                    checkNewTurn()
+                                    checkGameStatus()
                                 }}>
                                     Проверка на новый ход
                                 </Button>
@@ -163,7 +194,10 @@ const GameTable: FC = () => {
                                         }}>
                                     Рефетч
                                 </Button>
-                                <Button colorType={"accept"} type={"button"} onClick={handleEndTurn}>
+                                <Button colorType={"accept"} type={"button"}
+                                        onClick={handleEndTurn}
+                                        isDisabled={isButtonDisabled}
+                                >
                                     Закончить ход
                                 </Button>
                             </div>
