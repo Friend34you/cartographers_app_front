@@ -1,4 +1,5 @@
 export interface ITask {
-    image: string;
+    name: string;
+    image_url: string;
     text: string;
 }

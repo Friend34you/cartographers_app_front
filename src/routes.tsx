@@ -1,8 +1,9 @@
-import {ALL_ROOMS_ROUTE, AUTH_ROUTE, GAME_ROUTE, ROOM_ROUTE} from "./utils/consts";
+import {ALL_ROOMS_ROUTE, AUTH_ROUTE, GAME_END_ROUTE, GAME_ROUTE, ROOM_ROUTE} from "./utils/routeConsts";
 import AuthPage from "./components/Auth/AuthPage";
 import Room from "./components/Rooms/Room/Room";
 import GameTable from "./components/GameTable/GameTable";
 import RoomsPage from "./components/Rooms/RoomsPage";
+import GameEnd from "./components/GameTable/GameEnd/GameEnd";
 
 
 interface Routes {
@@ -30,5 +31,9 @@ export const privateRoutes = [
     {
         path: GAME_ROUTE,
         Component: <GameTable/>
+    },
+    {
+        path: GAME_END_ROUTE,
+        Component: <GameEnd/>
     }
 ]

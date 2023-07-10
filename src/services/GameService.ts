@@ -1,5 +1,7 @@
 import {roomAPI} from "./RoomService";
 import {IGame} from "../models/IGame";
+import {IPlayerGameResult} from "../models/IPlayerGameResult";
+import {IGameEnd} from "../models/IGameEnd";
 
 export const gameAPI = roomAPI.injectEndpoints(
     {
@@ -40,6 +42,11 @@ export const gameAPI = roomAPI.injectEndpoints(
                     method: 'DELETE',
                 })
             }),
+            getGameEnd: builder.query<IGameEnd, any>({
+                query: () => ({
+                    url: '/games/results/',
+                })
+            })
         })
     }
 )

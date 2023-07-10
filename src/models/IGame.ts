@@ -1,5 +1,6 @@
 import {IPlayer} from "./IPlayer";
 import {ITask} from "./ITask";
+import {ISeason} from "./ISeason";
 
 export interface IGame {
     "id": number;
@@ -11,12 +12,7 @@ export interface IGame {
         "autumn": string;
         "winter": string;
     },
-    "tasks": {
-        "first": ITask;
-        "second": ITask;
-        "third": ITask;
-        "fourth": ITask;
-    },
+    "tasks": ITask[],
     "current_season_name": "spring" | "summer" | "autumn" | "winter";
     "players": IPlayer[]
     "discovery_card": {
@@ -35,10 +31,10 @@ export interface IGame {
     },
     "is_on_ruins": boolean;
     "season_scores": {
-        "spring_score": IGame;
-        "summer_scores": IGame;
-        "fall_score": IGame;
-        "winter_score": IGame;
+        "spring_score": ISeason;
+        "summer_scores": ISeason;
+        "fall_score": ISeason;
+        "winter_score": ISeason;
     };
     "player_coins": number,
     "player_score": number

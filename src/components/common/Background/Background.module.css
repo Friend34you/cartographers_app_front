@@ -1,0 +1,217 @@
+:root {
+    --background: #b1e7ff;
+    --trunk: #c2653c;
+    --trunk2: #9d5d5d;
+    --leaves1: #039303;
+    --leaves2: green;
+    --leaves3: #015401;
+}
+
+.background {
+    background-color: var(--background);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.round_tree {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+
+.round_tree_part1 {
+    background-color: var(--leaves2);
+    position: absolute;
+    border-radius: 100%;
+    width: 85px;
+    height: 85px;
+    z-index: -9;
+    bottom: 65px;
+    left: 10px;
+}
+
+.round_tree_part2 {
+    background-color: var(--leaves3);
+    position: absolute;
+    border-radius: 100%;
+    width: 110px;
+    height: 110px;
+    z-index: -10;
+    bottom: 50px;
+}
+
+.round_tree_part3 {
+    background-color: var(--trunk2);
+    position: absolute;
+    width: 14px;
+    height: 80px;
+    bottom: 0;
+    left: 50px;
+    z-index: -11;
+
+}
+
+.pine {
+    width: fit-content;
+    position: absolute;
+    bottom: 0;
+    right: 40%;
+}
+
+.pine_part1 {
+    top: 0;
+    left: 10px;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 70px solid var(--leaves1);
+    height: 0;
+    position: absolute;
+    width: 0;
+    z-index: -1;
+}
+
+.pine_part2 {
+    top: 40px;
+    border-left: 45px solid transparent;
+    border-right: 45px solid transparent;
+    border-bottom: 75px solid var(--leaves2);
+    position: absolute;
+    left: 5px;
+    width: 0;
+    height: 0;
+    z-index: -2;
+
+}
+
+.pine_part3 {
+    top: 80px;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 80px solid var(--leaves3);
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: -3;
+
+}
+
+.pine_part4 {
+    top: 150px;
+    left: 42px;
+    position: relative;
+    width: 16px;
+    height: 40px;
+    background-color: var(--trunk);
+    z-index: -4;
+}
+
+.bush {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+}
+
+.bush_part1 {
+    width: 100px;
+    height: 40px;
+    background-color: var(--leaves3);
+    bottom: 50px;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+}
+
+.bush_part2 {
+    width: 100px;
+    height: 15px;
+    border-bottom-right-radius: 13px;
+    border-bottom-left-radius: 13px;
+    background-color: var(--leaves3);
+}
+
+.big_tree {
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+}
+
+.big_tree_part1 {
+    background-color: var(--leaves2);
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    border-top-left-radius: 100%;
+    bottom: 160px;
+    left: 55px;
+}
+
+.big_tree_part2 {
+    background-color: var(--leaves1);
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    border-top-right-radius: 100%;
+    bottom: 160px;
+    left: 85px;
+}
+
+.big_tree_part3 {
+    background-color: var(--leaves1);
+    position: absolute;
+    width: 50px;
+    height: 65px;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    bottom: 110px;
+    left: 85px;
+
+}
+
+.big_tree_part4 {
+    background-color: var(--leaves2);
+    position: absolute;
+    width: 50px;
+    height: 65px;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    bottom: 110px;
+    left: 35px;
+}
+
+.big_tree_part5 {
+    background-color: var(--leaves1);
+    position: absolute;
+    width: 80px;
+    height: 85px;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    bottom: 55px;
+    left: 85px;
+ }
+
+.big_tree_part6 {
+    background-color: var(--leaves2);
+    position: absolute;
+    width: 80px;
+    height: 85px;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    bottom: 55px;
+    left: 5px;
+}
+
+.big_tree_part7 {
+    height: 190px;
+    width: 14px;
+    position: absolute;
+    bottom: 0;
+    background-color: var(--trunk2);
+    z-index: -4;
+    left: 78px;
+}
+
+

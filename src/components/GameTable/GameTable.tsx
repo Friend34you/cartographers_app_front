@@ -1,10 +1,10 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Navigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import s from "./GameTable.module.css"
 import backgroundSound from "./../../static/sounds/backgroundMusic/cool adventure music.mp3"
 import playersIcon from "../../static/players.svg"
 import fieldImg from "../../static/field.png"
-import {ALL_ROOMS_ROUTE} from "../../utils/consts";
+import {ALL_ROOMS_ROUTE, GAME_END_ROUTE} from "../../utils/routeConsts";
 import {gameAPI} from "../../services/GameService";
 import Board from "../../models/Board";
 import Button from "../common/Button/Button";
@@ -23,6 +23,7 @@ import task2 from "./../../static/для отчёта/img_1.png"
 import task3 from "./../../static/для отчёта/img_2.png"
 import task4 from "./../../static/для отчёта/img_3.png"
 import {GameStatusTypes} from "../../utils/gameStatusTypes";
+import Background from "../common/Background/Background";
 
 
 const GameTable: FC = () => {
@@ -56,6 +57,7 @@ const GameTable: FC = () => {
             }] = gameAPI.useCheckGameStatusMutation();
         const [endTurn, {isLoading: isEndTurnLoading}] = gameAPI.useEndTurnMutation();
 
+        const navigate = useNavigate()
         const [board, setBoard] = useState(new Board())
         const [figureAvailable, setFigureAvailable] = useState(true)
         const [modalActive, setModalActive] = useState(false)
@@ -103,11 +105,16 @@ const GameTable: FC = () => {
                 return;
             }
             setButtonDisabled(true);
-
             await endTurn(board.cells);
+
             console.log("try to find time");
             const timerId = setInterval(async () => {
                 const checkNewTurnRes = await checkGameStatus();
+
+                if ("data" in checkNewTurnRes && checkNewTurnRes.data === GameStatusTypes.gameFinished) {
+                    clearInterval(timerId);
+                    navigate(GAME_END_ROUTE);
+                }
                 if ("data" in checkNewTurnRes && checkNewTurnRes.data === GameStatusTypes.newMoveStarted) {
                     await refetch();
                     clearInterval(timerId);
@@ -131,10 +138,6 @@ const GameTable: FC = () => {
         if (isGameDataSuccess) {
             console.log(gameData);
         }
-
-        // if (isFetching) {
-        //     return (<Loader sidePxSize={100}/>)
-        // }
 
         return (<>
             {isGameDataLoading && <Loader sidePxSize={100}/>}
@@ -216,6 +219,7 @@ const GameTable: FC = () => {
                             )}
                         </div>
                     </Modal>
+                    <Background season={"spring"}/>
                 </>}
         </>);
 

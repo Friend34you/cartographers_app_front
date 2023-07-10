@@ -22,7 +22,8 @@ const Navbar = () => {
 
     const [findRoom, {data}] = roomAPI.useFindRoomMutation()
     const {data: user, isSuccess, isFetching} = userAPI.useFetchUserDataQuery("", {
-        refetchOnMountOrArgChange: true
+        refetchOnMountOrArgChange: true,
+        refetchOnReconnect: true
     })
 
     const debouncedCallback = useDebounce((value: string) => {

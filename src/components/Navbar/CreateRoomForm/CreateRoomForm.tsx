@@ -4,7 +4,7 @@ import s from "./CreateRoomForm.module.css"
 import Input from "../../common/Input/Input";
 import {roomAPI} from "../../../services/RoomService";
 import {Navigate} from "react-router-dom";
-import {ROOM_ROUTE} from "../../../utils/consts";
+import {ROOM_ROUTE} from "../../../utils/routeConsts";
 import {ifError} from "assert";
 import Loader from "../../common/Loader/Loader";
 

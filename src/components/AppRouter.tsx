@@ -1,8 +1,9 @@
 import React, {createContext, useState} from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {privateRoutes, publicRoutes} from "../routes";
-import {ALL_ROOMS_ROUTE, AUTH_ROUTE, ROOM_ROUTE} from "../utils/consts";
+import {ALL_ROOMS_ROUTE, AUTH_ROUTE, ROOM_ROUTE} from "../utils/routeConsts";
 import {IAuthContext} from "../models/IAuthContext";
+import Background from "./common/Background/Background";
 
 export const AuthContext = createContext<Partial<IAuthContext>>({})
 
@@ -21,6 +22,7 @@ const AppRouter = () => {
                         element={<Navigate to={`${ALL_ROOMS_ROUTE}`}/>}
                     />
                 </Routes>
+                <Background/>
             </AuthContext.Provider>
         )
         : (
@@ -33,6 +35,7 @@ const AppRouter = () => {
                         element={<Navigate to={`${AUTH_ROUTE}`}/>}
                     />
                 </Routes>
+                {/*<Background/>*/}
             </AuthContext.Provider>
         )
 };

@@ -3,7 +3,7 @@ import {IRoom} from "../../../models/IRoom";
 import s from "./RoomItem.module.css"
 import lockIcon from "../../../static/roomItemPadlock/padlock1.png"
 import {Link, Navigate} from "react-router-dom";
-import {ROOM_ROUTE} from "../../../utils/consts";
+import {ROOM_ROUTE} from "../../../utils/routeConsts";
 import {roomAPI} from "../../../services/RoomService";
 import Modal from "../../common/Modal/Modal";
 import Input from "../../common/Input/Input";

@@ -1,6 +1,6 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
 import {Link, Navigate} from "react-router-dom";
-import {ALL_ROOMS_ROUTE, GAME_ROUTE} from "../../../utils/consts";
+import {ALL_ROOMS_ROUTE, GAME_ROUTE} from "../../../utils/routeConsts";
 import s from "./Room.module.css"
 import copyImg from "../../../static/copy.png"
 import kickUserImg from "./../../../static/close_red.png"

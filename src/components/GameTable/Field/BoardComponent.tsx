@@ -12,9 +12,9 @@ interface FieldProps {
 const BoardComponent:FC<FieldProps> = ({board, updateBoard, isOnRuins}) => {
     return (
         <div className={s.field}>
-            {board.cells.map((row: any, y: any) =>
+            {board.cells.map((row, y) =>
                 <React.Fragment key={y}>
-                    {row.map((el: any, x: any) =>
+                    {row.map((el, x) =>
                         <BoardCell
                             key={x}
                             type={board.cells[y][x]}
