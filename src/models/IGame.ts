@@ -9,11 +9,11 @@ export interface IGame {
     "seasons": {
         "spring": string;
         "summer": string;
-        "autumn": string;
+        "fall": string;
         "winter": string;
     },
     "tasks": ITask[],
-    "current_season_name": "spring" | "summer" | "autumn" | "winter";
+    "current_season_name": "spring" | "summer" | "fall" | "winter";
     "players": IPlayer[]
     "discovery_card": {
         "image": string;

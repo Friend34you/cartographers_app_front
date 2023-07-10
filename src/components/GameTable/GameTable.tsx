@@ -219,7 +219,7 @@ const GameTable: FC = () => {
                             )}
                         </div>
                     </Modal>
-                    <Background season={"spring"}/>
+                    <Background season={gameData.current_season_name}/>
                 </>}
         </>);
 

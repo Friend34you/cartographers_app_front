@@ -1,14 +1,20 @@
 :root {
-    --background: #b1e7ff;
+    --background: #daf8ff;
     --trunk: #c2653c;
     --trunk2: #9d5d5d;
     --leaves1: #039303;
     --leaves2: green;
     --leaves3: #015401;
+    --bush: #99b31a
+}
+
+body {
+    background-color: var(--background);
+    transition: .6s linear;
 }
 
 .background {
-    background-color: var(--background);
+    transition: .6s linear;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -16,6 +22,10 @@
     top: 0;
     left: 0;
     z-index: -1;
+}
+
+.background > * {
+    transition: .6s linear;
 }
 
 .round_tree {
@@ -113,7 +123,7 @@
 .bush_part1 {
     width: 100px;
     height: 40px;
-    background-color: var(--leaves3);
+    background-color: var(--bush);
     bottom: 50px;
     border-top-right-radius: 50px;
     border-top-left-radius: 50px;
@@ -124,7 +134,7 @@
     height: 15px;
     border-bottom-right-radius: 13px;
     border-bottom-left-radius: 13px;
-    background-color: var(--leaves3);
+    background-color: var(--bush);
 }
 
 .big_tree {
@@ -185,7 +195,7 @@
     border-bottom-right-radius: 100%;
     bottom: 55px;
     left: 85px;
- }
+}
 
 .big_tree_part6 {
     background-color: var(--leaves2);

@@ -22,7 +22,6 @@ const AppRouter = () => {
                         element={<Navigate to={`${ALL_ROOMS_ROUTE}`}/>}
                     />
                 </Routes>
-                <Background/>
             </AuthContext.Provider>
         )
         : (
@@ -35,7 +34,6 @@ const AppRouter = () => {
                         element={<Navigate to={`${AUTH_ROUTE}`}/>}
                     />
                 </Routes>
-                {/*<Background/>*/}
             </AuthContext.Provider>
         )
 };
