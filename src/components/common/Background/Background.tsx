@@ -49,61 +49,109 @@ const Background: FC<BackgroundProps> = ({season = "spring"}) => {
 
 
     return (
-        // <div className={s.background}>
-        //     <div className={s.round_tree}>
-        //         <div className={s.round_tree_part1}/>
-        //         <div className={s.round_tree_part2}/>
-        //         <div className={s.round_tree_part3}/>
-        //     </div>
-        //
-        //     <div className={s.pine}>
-        //         <div className={s.pine_part1}></div>
-        //         <div className={s.pine_part2}></div>
-        //         <div className={s.pine_part3}></div>
-        //         <div className={s.pine_part4}></div>
-        //     </div>
-        //
-        //     <div className={s.bush}>
-        //         <div className={s.bush_part1}></div>
-        //         <div className={s.bush_part2}></div>
-        //     </div>
-        //     <div className={s.big_tree}>
-        //         <div className={s.big_tree_part1}></div>
-        //         <div className={s.big_tree_part2}></div>
-        //         <div className={s.big_tree_part3}></div>
-        //         <div className={s.big_tree_part4}></div>
-        //         <div className={s.big_tree_part5}></div>
-        //         <div className={s.big_tree_part6}></div>
-        //         <div className={s.big_tree_part7}></div>
-        //     </div>
-        // </div>
+        <div className={s.background}>
 
-        <div className="background">
-            <div className="round_tree">
-                <div className="round_tree_part1"/>
-                <div className="round_tree_part2"/>
-                <div className="round_tree_part3"/>
+            <div className={`${s.cloud} ${s.cloud1}`}></div>
+            <div className={`${s.cloud} ${s.cloud2}`}></div>
+            <div className={`${s.cloud} ${s.cloud3}`}></div>
+            <div className={`${s.cloud} ${s.cloud4}`}></div>
+            <div className={`${s.cloud} ${s.cloud5}`}></div>
+            <div className={`${s.cloud} ${s.cloud6}`}></div>
+
+            <div className={`${s.round_tree} ${s.round_tree1}`}>
+                <div className={s.round_tree_part1}/>
+                <div className={s.round_tree_part2}/>
+                <div className={s.round_tree_part3}/>
             </div>
 
-            <div className="pine">
-                <div className="pine_part1"></div>
-                <div className="pine_part2"></div>
-                <div className="pine_part3"></div>
-                <div className="pine_part4"></div>
+            <div className={`${s.round_tree} ${s.round_tree2}`}>
+                <div className={s.round_tree_part1}/>
+                <div className={s.round_tree_part2}/>
+                <div className={s.round_tree_part3}/>
             </div>
 
-            <div className="bush">
-                <div className="bush_part1"></div>
-                <div className="bush_part2"></div>
+            <div className={`${s.pine} ${s.pine1}`}>
+                <div className={s.pine_part1}></div>
+                <div className={s.pine_part2}></div>
+                <div className={s.pine_part3}></div>
+                <div className={s.pine_part4}></div>
             </div>
-            <div className="big_tree">
-                <div className="big_tree_part1"></div>
-                <div className="big_tree_part2"></div>
-                <div className="big_tree_part3"></div>
-                <div className="big_tree_part4"></div>
-                <div className="big_tree_part5"></div>
-                <div className="big_tree_part6"></div>
-                <div className="big_tree_part7"></div>
+
+            <div className={`${s.pine} ${s.pine2}`}>
+                <div className={s.pine_part1}></div>
+                <div className={s.pine_part2}></div>
+                <div className={s.pine_part3}></div>
+                <div className={s.pine_part4}></div>
+            </div>
+
+            <div className={`${s.pine} ${s.pine3}`}>
+                <div className={s.pine_part1}></div>
+                <div className={s.pine_part2}></div>
+                <div className={s.pine_part3}></div>
+                <div className={s.pine_part4}></div>
+            </div>
+
+            <div className={`${s.bush} ${s.bush1}`}>
+                <div className={s.bush_part1}></div>
+                <div className={s.bush_part2}></div>
+            </div>
+
+            <div className={`${s.bush} ${s.bush2}`}>
+                <div className={s.bush_part1}></div>
+                <div className={s.bush_part2}></div>
+            </div>
+
+            <div className={`${s.bush} ${s.bush3}`}>
+                <div className={s.bush_part1}></div>
+                <div className={s.bush_part2}></div>
+            </div>
+
+            <div className={`${s.bush} ${s.bush4}`}>
+                <div className={s.bush_part1}></div>
+                <div className={s.bush_part2}></div>
+            </div>
+
+            <div className={`${s.bush} ${s.bush5}`}>
+                <div className={s.bush_part1}></div>
+                <div className={s.bush_part2}></div>
+            </div>
+
+            <div className={`${s.bush} ${s.bush6}`}>
+                <div className={s.bush_part1}></div>
+                <div className={s.bush_part2}></div>
+            </div>
+
+            <div className={`${s.bush} ${s.bush7}`}>
+                <div className={s.bush_part1}></div>
+                <div className={s.bush_part2}></div>
+            </div>
+
+
+            <div className={`${s.bush} ${s.bush8}`}>
+                <div className={s.bush_part1}></div>
+                <div className={s.bush_part2}></div>
+            </div>
+
+
+            <div className={`${s.bush} ${s.bush9}`}>
+                <div className={s.bush_part1}></div>
+                <div className={s.bush_part2}></div>
+            </div>
+
+
+            <div className={`${s.bush} ${s.bush10}`}>
+                <div className={s.bush_part1}></div>
+                <div className={s.bush_part2}></div>
+            </div>
+
+            <div className={s.big_tree}>
+                <div className={s.big_tree_part1}></div>
+                <div className={s.big_tree_part2}></div>
+                <div className={s.big_tree_part3}></div>
+                <div className={s.big_tree_part4}></div>
+                <div className={s.big_tree_part5}></div>
+                <div className={s.big_tree_part6}></div>
+                <div className={s.big_tree_part7}></div>
             </div>
         </div>
     );

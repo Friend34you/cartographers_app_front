@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {IRoom} from "../models/IRoom";
-
+// 'http://25.44.215.12:8000'
 const url = 'http://localhost:8000'
 
 export const roomAPI = createApi({

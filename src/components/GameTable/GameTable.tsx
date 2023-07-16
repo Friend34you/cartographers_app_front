@@ -155,10 +155,10 @@ const GameTable: FC = () => {
                         <section className={s.interactions_wrapper}>
                             <div className={s.season}>
                                 <div className={s.tasks}>
-                                    <TaskCard letter={"A"} taskImage={task1}/>
-                                    <TaskCard letter={"B"} taskImage={task2}/>
-                                    <TaskCard letter={"C"} taskImage={task3}/>
-                                    <TaskCard letter={"D"} taskImage={task4}/>
+                                    <TaskCard letter={"A"} taskImage={gameData.tasks[0].image_url}/>
+                                    <TaskCard letter={"B"} taskImage={gameData.tasks[1].image_url}/>
+                                    <TaskCard letter={"C"} taskImage={gameData.tasks[2].image_url}/>
+                                    <TaskCard letter={"D"} taskImage={gameData.tasks[3].image_url}/>
                                 </div>
                                 <SeasonCard seasonImage={gameData.seasons[gameData.current_season_name]}/>
                                 <section className={s.buttons_wrapper}>

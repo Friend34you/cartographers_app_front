@@ -1,14 +1,42 @@
 :root {
-    --background: #b1e7ff;
+    --background: #daf8ff;
     --trunk: #c2653c;
     --trunk2: #9d5d5d;
     --leaves1: #039303;
     --leaves2: green;
     --leaves3: #015401;
+    --bush: #99b31a
+}
+
+@keyframes cloudsAnimation {
+    0% {
+        transform: translateX(0px);
+    }
+
+    25% {
+        transform: translateX(70px);
+    }
+
+    50% {
+        transform: translateX(0px);
+    }
+
+    75% {
+        transform: translateX(-70px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+body {
+    background-color: var(--background);
+    transition: .6s linear;
 }
 
 .background {
-    background-color: var(--background);
+    transition: .6s linear;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -18,12 +46,64 @@
     z-index: -1;
 }
 
-.round_tree {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+.background > * {
+    transition: .6s linear;
 }
 
+.cloud {
+    position: fixed;
+    background-color: #FAFAFA;
+    width: 180px;
+    height: 70px;
+    border-radius: 60px;
+    animation: cloudsAnimation 20s infinite ease-in-out;
+}
+
+.cloud1 {
+    right: 5%;
+    top: 8%;
+}
+
+.cloud2 {
+    right: 15%;
+    top: 20%;
+}
+
+.cloud3 {
+    right: 30%;
+    top: 3%;
+}
+
+.cloud4 {
+    right: 50%;
+    top: 15%;
+}
+
+.cloud5 {
+    right: 67%;
+    top: 1%;
+}
+
+.cloud6 {
+    right: 85%;
+    top: 10%;
+}
+
+.round_tree {
+    position: fixed;
+}
+
+.round_tree1 {
+    position: fixed;
+    bottom: 20px;
+    left: 5%;
+}
+
+.round_tree2 {
+    position: fixed;
+    bottom: 5px;
+    left: 45%;
+}
 
 .round_tree_part1 {
     background-color: var(--leaves2);
@@ -58,9 +138,23 @@
 }
 
 .pine {
-    position: absolute;
-    bottom: 200px;
-    right: 100px;
+    position: fixed;
+}
+
+.pine1 {
+    bottom: 220px;
+    right: 6%;
+}
+
+.pine2 {
+    bottom: 235px;
+    right: 13%;
+}
+
+.pine3 {
+    z-index: -2;
+    bottom: 230px;
+    left: -1%;
 }
 
 .pine_part1 {
@@ -99,38 +193,84 @@
     left: 42px;
     position: absolute;
     width: 16px;
-    height: 40px;
+    height: 45px;
     background-color: var(--trunk);
     z-index: -4;
 }
 
 .bush {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
+    position: fixed;
+    bottom: -10px;
+}
+
+.bush1 {
+    right: 0%;
+    bottom: -14px;
+}
+
+.bush2 {
+    right: 6%;
+    bottom: -5px;
+}
+
+.bush3 {
+    left: 0%;
+}
+
+.bush4 {
+    left: 6%;
+    bottom: -20px;
+}
+
+.bush5 {
+    left: 57%;
+    bottom: -18px;
+}
+
+.bush6 {
+    left: 45%;
+    bottom: -20px;
+}
+
+.bush7 {
+    left: 51%;
+}
+
+.bush8 {
+    left: 12%;
+    bottom: -20px;
+}
+
+.bush9 {
+    right: 12%;
+}
+
+.bush10 {
+    left: 39%;
 }
 
 .bush_part1 {
-    width: 100px;
-    height: 40px;
-    background-color: var(--leaves3);
+    width: 90px;
+    height: 38px;
+    background-color: var(--bush);
     bottom: 50px;
     border-top-right-radius: 50px;
     border-top-left-radius: 50px;
 }
 
 .bush_part2 {
-    width: 100px;
+    width: 90px;
     height: 15px;
     border-bottom-right-radius: 13px;
     border-bottom-left-radius: 13px;
-    background-color: var(--leaves3);
+    background-color: var(--bush);
 }
 
 .big_tree {
-    position: absolute;
-    bottom: 0;
-    left: 30%;
+    z-index: -1;
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
 }
 
 .big_tree_part1 {
@@ -185,7 +325,7 @@
     border-bottom-right-radius: 100%;
     bottom: 55px;
     left: 85px;
- }
+}
 
 .big_tree_part6 {
     background-color: var(--leaves2);
