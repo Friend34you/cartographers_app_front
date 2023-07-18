@@ -46,7 +46,7 @@ body {
     z-index: -1;
 }
 
-.background > * {
+.background * {
     transition: .6s linear;
 }
 

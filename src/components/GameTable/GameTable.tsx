@@ -43,12 +43,6 @@ const GameTable: FC = () => {
                 isSuccess: isLeaveGameSuccess,
                 isError: isLeaveGameError
             }] = gameAPI.useLeaveGameMutation();
-        // const [checkNewTurn,
-        //     {
-        //         data: checkNewTurnData,
-        //         isSuccess: isCheckTurnSuccess,
-        //         isLoading: isCheckTurnLoading
-        //     }] = gameAPI.useCheckNewTurnMutation();
         const [checkGameStatus,
             {
                 data: checkGameStatusData,
@@ -101,13 +95,10 @@ const GameTable: FC = () => {
         /** Обработать возможность выпадения ошибки!!! **/
         async function handleEndTurn() {
             if (figureAvailable) {
-                console.log("lox, postav' figuru")
                 return;
             }
             setButtonDisabled(true);
             await endTurn(board.cells);
-
-            console.log("try to find time");
             const timerId = setInterval(async () => {
                 const checkNewTurnRes = await checkGameStatus();
 
@@ -184,18 +175,6 @@ const GameTable: FC = () => {
                                         isDisabled={isButtonDisabled}
                                 >
                                     Отменить действие
-                                </Button>
-                                <Button colorType={"accept"} type={"button"} onClick={() => {
-                                    checkGameStatus()
-                                }}>
-                                    Проверка на новый ход
-                                </Button>
-                                <Button colorType={"accept"} type={"button"}
-                                        onClick={() => {
-                                            refetch();
-                                            // setFigureAvailable(true);
-                                        }}>
-                                    Рефетч
                                 </Button>
                                 <Button colorType={"accept"} type={"button"}
                                         onClick={handleEndTurn}

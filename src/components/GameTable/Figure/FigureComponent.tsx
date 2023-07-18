@@ -5,6 +5,7 @@ import s from "./FigureComponent.module.css"
 import rotateLeftIcon from "./../../../static/rotate-left.png"
 import invertV from "./../../../static/invertVertical2.png"
 import invertH from "./../../../static/invertHorizontal2.png"
+import InteractiveIconButton from "../../common/InteractiveIconButton/InteractiveIconButton";
 
 interface FigureProps {
     type: number;
@@ -12,8 +13,7 @@ interface FigureProps {
 }
 
 const FigureComponent: FC<FigureProps> = ({type, shape}) => {
-    let mas = [[0,0,0]]
-    // const mas = fillTypeToFigure(shape, type);
+    let mas = [[0, 0, 0]]
     const [figure, setFigure] = useState(new Figure(mas))
     const dragCell = {
         x: 0,
@@ -42,6 +42,7 @@ const FigureComponent: FC<FigureProps> = ({type, shape}) => {
         return newShape;
     }
 
+    /** Заготовка под изменения drag and drop на кастомный **/
     // function testHandle(e: React.MouseEvent) {
     //     const el = document.elementFromPoint(e.clientX, e.clientY);
     //     console.log("CAPTURE", el)
@@ -67,37 +68,36 @@ const FigureComponent: FC<FigureProps> = ({type, shape}) => {
         return newMatrix;
     }
 
+    function setFigureData(e: React.DragEvent) {
+        e.dataTransfer.setData("data", JSON.stringify(dragCell))
+    }
+
     return (
         <div className={s.container} draggable={false}>
             <section className={s.buttons}>
-                <div style={{height: "30px", width: "30px", margin: "5px"}}
-                     onClick={() => {
-                         updateFigure(rotateLeft(figure.cells))
-                     }}
-                >
-                    <img draggable={"false"} src={rotateLeftIcon} style={{width: "inherit"}} alt=""/>
-                </div>
-                <div style={{height: "30px", width: "30px", margin: "5px"}}
-                     onClick={() => {
-                         updateFigure(inverseHorizontal(figure.cells))
-                     }}
-                >
-                    <img draggable={"false"} src={invertH} style={{width: "inherit"}} alt=""/>
-                </div>
-                <div style={{height: "30px", width: "30px", margin: "5px"}}
-                     onClick={() => {
-                         updateFigure(inverseVertical(figure.cells))
-                     }}
-                >
-                    <img draggable={"false"} src={invertV} style={{width: "inherit"}} alt=""/>
-                </div>
+                <InteractiveIconButton
+                    icon={rotateLeftIcon}
+                    onClick={() => {
+                        updateFigure(rotateLeft(figure.cells))
+                    }}
+                />
+                <InteractiveIconButton
+                    icon={invertH}
+                    onClick={() => {
+                        updateFigure(inverseHorizontal(figure.cells))
+                    }}
+                />
+                <InteractiveIconButton
+                    icon={invertV}
+                    onClick={() => {
+                        updateFigure(inverseVertical(figure.cells))
+                    }}
+                />
             </section>
             <div style={{width: "fit-content", height: "fit-content"}}
 
                  draggable={"true"}
-                 onDragStart={(e: React.DragEvent) => {
-                     e.dataTransfer.setData("data", JSON.stringify(dragCell))
-                 }}
+                 onDragStart={setFigureData}
             >
                 {figure.cells.map((row, y) =>
                     <div className={s.row} key={y}>
@@ -111,4 +111,3 @@ const FigureComponent: FC<FigureProps> = ({type, shape}) => {
 
 export default FigureComponent;
 
-//еслм y фигуры больше чем y поля - нельзя
