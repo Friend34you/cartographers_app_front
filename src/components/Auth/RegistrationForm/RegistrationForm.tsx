@@ -5,9 +5,10 @@ import {FieldValues, useForm} from "react-hook-form";
 import view from "./../../../static/view.png"
 import hide from "./../../../static/hide.png"
 import {authAPI} from "../../../services/AuthService";
+import Input from "../../common/Input/Input";
 
 const RegistrationForm: FC = () => {
-    const [registrate, {data: response, isLoading, isError, isSuccess, error}] = authAPI.useRegistrationMutation()
+    const [userRegister, {data: response, isLoading, isError, isSuccess, error}] = authAPI.useRegistrationMutation()
     const {register, watch, handleSubmit, reset, formState: {errors}} = useForm({
         mode: "onBlur",
     });
@@ -16,7 +17,7 @@ const RegistrationForm: FC = () => {
         ? hide
         : view
     const onSubmit = (data: FieldValues) => {
-        registrate({
+        userRegister({
             username: data.username,
             password: data.password
         })
@@ -45,7 +46,7 @@ const RegistrationForm: FC = () => {
                             {errors?.username?.message as string}
                         </p>}
                 </span>
-                <input className={s.input} type="text" placeholder="Login" {...register("username", {
+                <Input type="text" placeholder="Login" {...register("username", {
                     required: "Поле обязательно к заполнению",
                     minLength: {
                         value: 5,
@@ -70,9 +71,9 @@ const RegistrationForm: FC = () => {
                         </p>}
                 </span>
                 <div className={s.input_wrapper}>
-                    <input className={s.input}
-                           type={passwordShown ? "text" : "password"}
-                           placeholder="Password" {...register("password", {
+                    <Input
+                        type={passwordShown ? "text" : "password"}
+                        placeholder="Password" {...register("password", {
                         required: "Поле обязательно к заполнению",
                         minLength: {
                             value: 8,
@@ -98,7 +99,7 @@ const RegistrationForm: FC = () => {
                             {errors?.confirm_password?.message as string}
                         </p>}
                 </span>
-                <input className={s.input}
+                <Input
                        type="password"
                        placeholder="Confirm password" {...register("confirm_password", {
                     required: "Поле обязательно к заполнению",

@@ -5,8 +5,8 @@ import {useForm} from "react-hook-form";
 import view from "./../../../static/view.png"
 import hide from "./../../../static/hide.png"
 import {authAPI} from "../../../services/AuthService";
-import {FetchBaseQueryError} from "@reduxjs/toolkit/query";
 import {AuthContext} from "../../AppRouter";
+import Input from "../../common/Input/Input";
 
 const AuthorizationForm = () => {
     const {setIsAuthorized} = useContext(AuthContext)
@@ -52,10 +52,9 @@ const AuthorizationForm = () => {
                             {errors?.username?.message as string}
                         </p>}
                 </span>
-                <input className={s.input} type="text" placeholder="Login" {...register("username", {
+                <Input type="text" placeholder="Login" {...register("username", {
                     required: "Поле обязательно к заполнению",
                 })} />
-
 
                 <span className={s.message_wrapper}>
                     <label>Пароль:</label>
@@ -65,7 +64,7 @@ const AuthorizationForm = () => {
                         </p>}
                 </span>
                 <div className={s.input_wrapper}>
-                    <input className={s.input}
+                    <Input
                            type={passwordShown ? "text" : "password"}
                            placeholder="Password" {...register("password", {
                         required: "Поле обязательно к заполнению",

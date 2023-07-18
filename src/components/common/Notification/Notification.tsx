@@ -3,7 +3,6 @@ import s from "./Notification.module.css"
 
 interface NotificationProps {
     active: boolean;
-    // setActive(): void;
 }
 
 const Notification: FC<NotificationProps> = ({active}) => {

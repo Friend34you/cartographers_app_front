@@ -7,13 +7,13 @@ interface BackgroundProps {
 }
 
 const Background: FC<BackgroundProps> = ({season = "spring"}) => {
+    /** Переделать на адекватный лад, без кучи "if" **/
     const backgroundColor = [];
     const leavesColor1 = [];
     const leavesColor2 = [];
     const leavesColor3 = [];
 
     useEffect(() => {
-        console.log("rerender sesona")
         if (season === "spring") {
             document.documentElement.style.setProperty('--background', '#daf8ff');
             document.documentElement.style.setProperty('--leaves1', '#add63a');
